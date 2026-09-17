@@ -24,6 +24,7 @@
   --color-slate-on-dark: var(--slate-on-dark);
   --font-display: "Baskervville", ui-serif, Georgia, serif;
   --font-body: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-signature: "Pinyon Script", cursive;
 }
 
 body {
@@ -38,6 +39,10 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+.font-signature {
+  font-family: var(--font-signature), "Pinyon Script", cursive;
 }
 
 ::selection {
