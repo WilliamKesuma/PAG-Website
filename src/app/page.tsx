@@ -64,9 +64,60 @@ const businesses = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
+
+  function openMenu() {
+    setMenuClosing(false);
+    setMenuOpen(true);
+  }
+
+  function closeMenu() {
+    setMenuClosing(true);
+    setTimeout(() => {
+      setMenuOpen(false);
+      setMenuClosing(false);
+    }, 350);
+  }
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
+
+      {/* ── FIXED STICKY HEADER ── */}
+      <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 sm:px-12 bg-black/40 backdrop-blur-md border-b border-white/5">
+        {/* Left: Logo → home */}
+        <Link href="/" aria-label="Project Art Group home">
+          <Image
+            src="/logos/LOGO PA GROUP PUTIH.png"
+            alt="Project Art Group"
+            width={120}
+            height={40}
+            className="h-9 w-auto object-contain"
+            priority
+          />
+        </Link>
+
+        {/* Right: Menu button + Inquire pill */}
+        <div className="flex items-center gap-5 text-xs tracking-widest text-zinc-400 uppercase sm:gap-7">
+          <Link
+            href="/corporate#contact"
+            className="hidden rounded-full border border-white/30 px-5 py-2 text-white transition-all hover:border-white hover:bg-white hover:text-black sm:inline-block"
+          >
+            INQUIRE
+          </Link>
+          <button
+            onClick={openMenu}
+            className="group flex items-center gap-2.5 transition-colors hover:text-white"
+            aria-label="Open menu"
+          >
+            <span className="flex flex-col gap-1">
+              <span className="h-0.5 w-5 bg-zinc-400 transition-all group-hover:bg-white" />
+              <span className="h-0.5 w-3 bg-zinc-400 transition-all group-hover:w-5 group-hover:bg-white" />
+            </span>
+            <span>MENU</span>
+          </button>
+        </div>
+      </header>
+
       {/* 1. FIRST SECTION WITH BACKGROUND PICTURE (NO FOOTER) */}
       <section
         className="relative flex min-h-screen flex-col justify-between overflow-hidden"
@@ -80,58 +131,6 @@ export default function Home() {
         {/* Cinematic overlay gradients */}
         <div className="absolute inset-0 z-0 pointer-events-none bg-black/50" />
         <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-transparent to-black/85" />
-
-        {/* Top Minimalist Header */}
-        <header className="relative z-30 flex items-center justify-between px-6 py-8 sm:px-12">
-          {/* Left: Menu & Index */}
-          <div className="flex items-center gap-6 text-xs tracking-widest text-zinc-400 uppercase">
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="group flex items-center gap-2.5 transition-colors hover:text-white"
-              aria-label="Open menu"
-            >
-              <span className="flex flex-col gap-1">
-                <span className="h-0.5 w-4 bg-zinc-400 transition-all group-hover:w-5 group-hover:bg-white" />
-                <span className="h-0.5 w-2.5 bg-zinc-400 transition-all group-hover:w-5 group-hover:bg-white" />
-              </span>
-              <span>MENU</span>
-            </button>
-            <span className="hidden text-zinc-600 sm:inline">|</span>
-            <span className="hidden text-zinc-500 sm:inline">EST. 2002</span>
-          </div>
-
-          {/* Center: Brand Name in Baskerville */}
-          <Link
-            href="/"
-            className="group flex flex-col items-center justify-center text-center"
-          >
-            <span className="font-display text-xl tracking-tight text-white transition-opacity group-hover:opacity-80 sm:text-2xl md:text-3xl">
-              Project Art Group
-            </span>
-          </Link>
-
-          {/* Right: Navigation Links & Inquire Pill */}
-          <div className="flex items-center gap-5 text-xs tracking-widest text-zinc-400 uppercase sm:gap-7">
-            <Link
-              href="#about"
-              className="hidden transition-colors hover:text-white sm:inline"
-            >
-              ABOUT
-            </Link>
-            <Link
-              href="/corporate"
-              className="hidden transition-colors hover:text-white sm:inline"
-            >
-              CORPORATE
-            </Link>
-            <Link
-              href="/corporate#contact"
-              className="rounded-full border border-white/30 px-5 py-2 text-white transition-all hover:border-white hover:bg-white hover:text-black"
-            >
-              INQUIRE
-            </Link>
-          </div>
-        </header>
 
         {/* Center Content: Single Project Art Group Heading + Image Logo Carousel */}
         <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-16 text-center">
@@ -182,23 +181,36 @@ export default function Home() {
         <div className="h-10" />
       </section>
 
-      {/* SLIDE-OUT MENU DRAWER (FROM LEFT) */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
+      {/* SLIDE-OUT MENU DRAWER (FROM LEFT) — always in DOM, animated via translate */}
+      {(menuOpen || menuClosing) && (
+        <div
+          className={`fixed inset-0 z-50 flex transition-opacity duration-350 ${
+            menuClosing ? "opacity-0" : "opacity-100"
+          }`}
+        >
           {/* Backdrop */}
           <div
-            onClick={() => setMenuOpen(false)}
-            className="absolute inset-0 bg-black/85 backdrop-blur-sm transition-opacity"
+            onClick={closeMenu}
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
 
-          {/* Drawer (Left Aligned, Black & Grey Luxury) */}
-          <div className="relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-white/10 bg-zinc-950 p-8 text-white transition-transform duration-300 sm:p-12">
+          {/* Drawer — slides in from the left */}
+          <div
+            className={`relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-white/10 bg-zinc-950 p-8 text-white sm:p-12 transition-transform duration-350 ease-out ${
+              menuClosing ? "-translate-x-full" : "translate-x-0"
+            }`}
+            style={{ transitionTimingFunction: "cubic-bezier(0.4,0,0.2,1)" }}
+          >
             <div className="flex items-center justify-between border-b border-white/10 pb-6">
-              <span className="font-display text-xl tracking-tight text-white">
-                Project Art Group
-              </span>
+              <Image
+                src="/logos/LOGO PA GROUP PUTIH.png"
+                alt="Project Art Group"
+                width={110}
+                height={36}
+                className="h-8 w-auto object-contain"
+              />
               <button
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="rounded-full border border-white/20 p-2 text-xs text-zinc-400 transition-colors hover:border-white hover:text-white"
                 aria-label="Close menu"
               >
@@ -212,28 +224,28 @@ export default function Home() {
               </p>
               <Link
                 href="/corporate"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="font-display text-2xl text-white transition-colors hover:text-zinc-400 sm:text-3xl"
               >
                 Project Art Corporate
               </Link>
               <Link
                 href="#businesses"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
               >
                 Project Art Plus (Weddings)
               </Link>
               <Link
                 href="#businesses"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
               >
                 Prime Project
               </Link>
               <Link
                 href="#businesses"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
               >
                 Oneway Party Idea
@@ -241,7 +253,7 @@ export default function Home() {
               <div className="pt-4">
                 <Link
                   href="/corporate#contact"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={closeMenu}
                   className="font-display text-2xl text-white underline decoration-white/40 underline-offset-8 transition-colors hover:text-zinc-300 sm:text-3xl"
                 >
                   Inquire / Talk to Us →
@@ -256,6 +268,7 @@ export default function Home() {
           </div>
         </div>
       )}
+
 
       {/* ABOUT & HERITAGE SECTION */}
       <section
