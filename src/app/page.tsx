@@ -14,17 +14,20 @@ const businesses = [
   {
     name: "Project Art Plus",
     tag: "Weddings",
-    description: "The flagship studio — high-glamour weddings built from concept to the last dance.",
+    description:
+      "The flagship studio — high-glamour weddings built from concept to the last dance.",
   },
   {
     name: "Prime Project",
     tag: "Weddings",
-    description: "Weddings built around what a couple actually needs, at a more accessible scale.",
+    description:
+      "Weddings built around what a couple actually needs, at a more accessible scale.",
   },
   {
     name: "Oneway Party Idea",
     tag: "Celebrations",
-    description: "Birthdays, parties, and the everyday celebrations that still deserve a good run of show.",
+    description:
+      "Birthdays, parties, and the everyday celebrations that still deserve a good run of show.",
   },
 ];
 
@@ -39,9 +42,9 @@ export default function Home() {
             Event production, done properly, since 2002.
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-void/75 sm:text-lg">
-            Project Art Group runs four studios out of Surabaya — weddings, parties, and the
-            corporate and institutional events of companies like Singapore Airlines, CIMB, and
-            Mercedes-Benz. This site is where that last part lives.
+            Project Art Group runs four studios out of Surabaya — weddings, parties, and
+            the corporate and institutional events of companies like Singapore Airlines,
+            CIMB, and Mercedes-Benz. This site is where that last part lives.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
@@ -81,8 +84,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24">
           <h2 className="font-display text-3xl sm:text-4xl">What we run</h2>
           <p className="mt-3 max-w-xl text-void/70">
-            Four studios, four kinds of occasion. Project Art Corporate is the one we&apos;re building
-            out in full here.
+            Four studios, four kinds of occasion. Project Art Corporate is the one
+            we&apos;re building out in full here.
           </p>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -112,7 +115,9 @@ export default function Home() {
                   <div>
                     <p className="text-xs text-brass">{b.tag}</p>
                     <h3 className="mt-2 font-display text-2xl">{b.name}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-void/70">{b.description}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-void/70">
+                      {b.description}
+                    </p>
                   </div>
                   <p className="mt-6 text-xs text-slate">Studio page in progress</p>
                 </div>
@@ -128,8 +133,9 @@ export default function Home() {
             &ldquo;Trust is a must.&rdquo;
           </p>
           <p className="mx-auto mt-5 max-w-md text-sm text-slate-on-dark">
-            That&apos;s been Project Art Corporate&apos;s line since 2002, and it&apos;s still what most
-            companies call us for — the event they can&apos;t afford to get wrong.
+            That&apos;s been Project Art Corporate&apos;s line since 2002, and it&apos;s
+            still what most companies call us for — the event they can&apos;t afford to
+            get wrong.
           </p>
           <Link
             href="/corporate#contact"

@@ -10,11 +10,23 @@ export const metadata: Metadata = {
 };
 
 const process = [
-  { step: "Concepting", detail: "Translating the brief into a theme, a flow, and a look." },
-  { step: "Budgeting", detail: "Costing the event against what it actually needs to achieve." },
-  { step: "Vendor & Supplier Selection", detail: "Sourcing venues, production, and talent." },
+  {
+    step: "Concepting",
+    detail: "Translating the brief into a theme, a flow, and a look.",
+  },
+  {
+    step: "Budgeting",
+    detail: "Costing the event against what it actually needs to achieve.",
+  },
+  {
+    step: "Vendor & Supplier Selection",
+    detail: "Sourcing venues, production, and talent.",
+  },
   { step: "Scheduling", detail: "Building the run of show and the lead-up timeline." },
-  { step: "Coordination Meeting", detail: "Aligning every vendor and stakeholder before the day." },
+  {
+    step: "Coordination Meeting",
+    detail: "Aligning every vendor and stakeholder before the day.",
+  },
   { step: "Dealing", detail: "Locking contracts and terms with every party involved." },
   { step: "Event Day", detail: "Full on-site production, start to finish." },
 ];
@@ -59,9 +71,9 @@ export default function Corporate() {
           The studio for events a company can&apos;t afford to get wrong.
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-void/75 sm:text-lg">
-          Project Art Corporate handles every corporate and institutional event Project Art
-          Group runs that isn&apos;t a wedding — planned and produced end to end, from the first
-          concept meeting to the last minute of the run of show.
+          Project Art Corporate handles every corporate and institutional event Project
+          Art Group runs that isn&apos;t a wedding — planned and produced end to end, from
+          the first concept meeting to the last minute of the run of show.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
@@ -85,9 +97,9 @@ export default function Corporate() {
             <div>
               <h2 className="font-display text-2xl">Who we&apos;re for</h2>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-void/70">
-                Mid-to-large corporate and institutional clients — companies, embassies, and
-                organizations that need an event managed by people who&apos;ve done it before,
-                not figured out for the first time on their budget.
+                Mid-to-large corporate and institutional clients — companies, embassies,
+                and organizations that need an event managed by people who&apos;ve done it
+                before, not figured out for the first time on their budget.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {eventTypes.map((t) => (
@@ -144,10 +156,12 @@ export default function Corporate() {
 
       <section className="border-t rule-void bg-void text-bone-soft">
         <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-20">
-          <h2 className="font-display text-2xl sm:text-3xl">Names that have called us back</h2>
+          <h2 className="font-display text-2xl sm:text-3xl">
+            Names that have called us back
+          </h2>
           <p className="mt-3 max-w-xl text-sm text-slate-on-dark">
-            A selection of the companies and institutions Project Art Corporate has produced
-            events for.
+            A selection of the companies and institutions Project Art Corporate has
+            produced events for.
           </p>
           <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
             {clients.map((c) => (
@@ -163,11 +177,13 @@ export default function Corporate() {
         <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24">
           <div className="grid gap-10 sm:grid-cols-[1.2fr_1fr] sm:items-start">
             <div>
-              <h2 className="font-display text-3xl sm:text-4xl">Start with a conversation</h2>
+              <h2 className="font-display text-3xl sm:text-4xl">
+                Start with a conversation
+              </h2>
               <p className="mt-4 max-w-md text-void/70">
-                Tell us the event, the date, and roughly what it needs to do. Glenn, who leads
-                marketing and client relationships for Project Art Corporate, will take it from
-                there.
+                Tell us the event, the date, and roughly what it needs to do. Glenn, who
+                leads marketing and client relationships for Project Art Corporate, will
+                take it from there.
               </p>
             </div>
             <div className="rounded-2xl border rule-bone bg-bone-soft p-8">

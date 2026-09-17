@@ -13,7 +13,8 @@ export default function Footer() {
           <div>
             <p className="font-display text-lg">Project Art Group</p>
             <p className="mt-3 max-w-xs text-sm text-slate-on-dark">
-              Four studios, one standard for how an event gets built. Trust is a must — since 2002.
+              Four studios, one standard for how an event gets built. Trust is a must —
+              since 2002.
             </p>
           </div>
           <div>
