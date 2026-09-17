@@ -5,26 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
-// Studio Brand Logos for the Carousel - Using user's updated logo files
+// Studio Brand Logos for the Carousel (Matched to files in public/logos/)
 const brandLogos = [
   {
+    name: "Project Art Corporate",
+    src: "/logos/LOGO PA CORP WHITE.png",
+    href: "/corporate",
+  },
+  {
     name: "Project Art Plus",
-    src: "/logos/Logo PA Mix White.png",
+    src: "/logos/LOGO PA WHITE.png",
+    href: "#businesses",
+  },
+  {
+    name: "Prime Project",
+    src: "/logos/LOGO PP PUTIH.png",
     href: "#businesses",
   },
   {
     name: "Oneway Party Idea",
     src: "/logos/LOGO ONEWAY WHITE.png",
-    href: "#businesses",
-  },
-  {
-    name: "Project Art Corporate",
-    src: "/logos/PAP_Project Art Corp Logo BIG.png",
-    href: "/corporate",
-  },
-  {
-    name: "Prime Project",
-    src: "/logos/PP PUTIH copy.png",
     href: "#businesses",
   },
 ];
@@ -89,7 +89,7 @@ export default function Home() {
               className="flex shrink-0 items-center transition-transform hover:scale-105"
             >
               <Image
-                src="/logos/Logo PA Group white.png"
+                src="/logos/LOGO PA GROUP PUTIH.png"
                 alt="Project Art Group Logo"
                 width={48}
                 height={48}
@@ -163,9 +163,9 @@ export default function Home() {
             Surabaya · Bali · Jakarta · Overseas
           </p>
 
-          {/* PROMINENT, UNCONSTRAINED FULL LOGO CAROUSEL */}
+          {/* PROMINENT FULL LOGO CAROUSEL */}
           <div className="mt-14 w-full max-w-4xl overflow-hidden py-4">
-            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
               <div className="animate-marquee flex items-center gap-12 sm:gap-16 py-4">
                 {[...brandLogos, ...brandLogos, ...brandLogos, ...brandLogos].map(
                   (logo, index) => (
@@ -177,7 +177,7 @@ export default function Home() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={logo.src}
+                        src={encodeURI(logo.src)}
                         alt={logo.name}
                         className="h-14 sm:h-16 w-auto max-h-20 object-contain filter transition-all duration-300 group-hover:brightness-125"
                       />
@@ -207,7 +207,7 @@ export default function Home() {
             <div className="flex items-center justify-between border-b border-white/10 pb-6">
               <div className="flex items-center gap-3">
                 <Image
-                  src="/logos/Logo PA Group white.png"
+                  src="/logos/LOGO PA GROUP PUTIH.png"
                   alt="Project Art Group Logo"
                   width={32}
                   height={32}
