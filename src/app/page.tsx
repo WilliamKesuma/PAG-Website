@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -63,27 +63,47 @@ const businesses = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [menuClosing, setMenuClosing] = useState(false);
+  // ── Header scroll transparency ──────────────────────────────
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // ── Menu center-expand state ─────────────────────────────────
+  // phase: "idle" | "opening" | "open" | "closing"
+  const [menuPhase, setMenuPhase] = useState<"idle"|"opening"|"open"|"closing">("idle");
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function openMenu() {
-    setMenuClosing(false);
-    setMenuOpen(true);
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setMenuPhase("opening");
+    // tiny frame delay so the scaleY transition fires from the initial state
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setMenuPhase("open"));
+    });
   }
 
   function closeMenu() {
-    setMenuClosing(true);
-    setTimeout(() => {
-      setMenuOpen(false);
-      setMenuClosing(false);
-    }, 350);
+    setMenuPhase("closing");
+    closeTimerRef.current = setTimeout(() => setMenuPhase("idle"), 600);
   }
+
+  const menuVisible = menuPhase !== "idle";
+  const menuExpanded = menuPhase === "open";
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
 
       {/* ── FIXED STICKY HEADER ── */}
-      <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 sm:px-12 bg-black/40 backdrop-blur-md border-b border-white/5">
+      <header
+        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 sm:px-12 transition-all duration-500 ${
+          scrolled
+            ? "bg-black/60 backdrop-blur-md border-b border-white/8"
+            : "bg-transparent border-b border-transparent"
+        }`}
+      >
         {/* Left: Logo → home */}
         <Link href="/" aria-label="Project Art Group home">
           <Image
@@ -181,27 +201,66 @@ export default function Home() {
         <div className="h-10" />
       </section>
 
-      {/* SLIDE-OUT MENU DRAWER (FROM LEFT) — always in DOM, animated via translate */}
-      {(menuOpen || menuClosing) && (
+      {/* ── CENTER-EXPAND FULL-SCREEN MENU ── */}
+      {menuVisible && (
         <div
-          className={`fixed inset-0 z-50 flex transition-opacity duration-350 ${
-            menuClosing ? "opacity-0" : "opacity-100"
-          }`}
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+          style={{
+            // Overlay fades in/out
+            background: menuExpanded ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0)",
+            transition: "background 0.55s cubic-bezier(0.4,0,0.2,1)",
+          }}
         >
-          {/* Backdrop */}
+          {/* The panel that grows from a thin line → full screen */}
           <div
-            onClick={closeMenu}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          />
-
-          {/* Drawer — slides in from the left */}
-          <div
-            className={`relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-white/10 bg-zinc-950 p-8 text-white sm:p-12 transition-transform duration-350 ease-out ${
-              menuClosing ? "-translate-x-full" : "translate-x-0"
-            }`}
-            style={{ transitionTimingFunction: "cubic-bezier(0.4,0,0.2,1)" }}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              transform: menuExpanded ? "scaleY(1) scaleX(1)" : "scaleY(0.015) scaleX(0.6)",
+              transformOrigin: "center center",
+              transition: menuExpanded
+                ? "transform 0.55s cubic-bezier(0.16,1,0.3,1)"
+                : "transform 0.45s cubic-bezier(0.4,0,0.6,1)",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              backgroundColor: "#0a0a0a",
+              padding: "0",
+              position: "relative",
+              overflow: "hidden",
+            }}
           >
-            <div className="flex items-center justify-between border-b border-white/10 pb-6">
+            {/* ── Thin accent line visible while panel is collapsed ── */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "10%",
+                right: "10%",
+                height: "1px",
+                background: "rgba(255,255,255,0.15)",
+                transform: "translateY(-50%)",
+                opacity: menuExpanded ? 0 : 1,
+                transition: "opacity 0.2s",
+              }}
+            />
+
+            {/* ── Header bar inside menu ── */}
+            <div
+              style={{
+                opacity: menuExpanded ? 1 : 0,
+                transform: menuExpanded ? "translateY(0)" : "translateY(-12px)",
+                transition: menuExpanded
+                  ? "opacity 0.4s 0.25s ease, transform 0.4s 0.25s ease"
+                  : "opacity 0.15s ease, transform 0.15s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "28px 48px",
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+              }}
+            >
               <Image
                 src="/logos/LOGO PA GROUP PUTIH.png"
                 alt="Project Art Group"
@@ -211,59 +270,98 @@ export default function Home() {
               />
               <button
                 onClick={closeMenu}
-                className="rounded-full border border-white/20 p-2 text-xs text-zinc-400 transition-colors hover:border-white hover:text-white"
+                className="group flex items-center gap-2 text-xs tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
                 aria-label="Close menu"
               >
-                ✕
+                <span>CLOSE</span>
+                <span className="flex flex-col gap-[3px] rotate-45">
+                  <span className="h-px w-4 bg-zinc-400 transition-colors group-hover:bg-white" style={{ transform: "translateY(3.5px)" }} />
+                  <span className="h-px w-4 bg-zinc-400 transition-colors group-hover:bg-white" style={{ transform: "translateY(-3.5px) rotate(90deg)" }} />
+                </span>
               </button>
             </div>
 
-            <div className="my-auto flex flex-col space-y-6 text-left">
-              <p className="text-xs tracking-widest text-zinc-400 uppercase">
+            {/* ── Nav links with staggered fade-up ── */}
+            <div
+              className="flex flex-1 flex-col justify-center px-12 sm:px-20"
+            >
+              <p
+                style={{
+                  opacity: menuExpanded ? 1 : 0,
+                  transform: menuExpanded ? "translateY(0)" : "translateY(20px)",
+                  transition: menuExpanded
+                    ? "opacity 0.45s 0.3s ease, transform 0.45s 0.3s ease"
+                    : "opacity 0.1s ease",
+                }}
+                className="mb-8 text-xs tracking-widest text-zinc-500 uppercase"
+              >
                 Studios &amp; Directory
               </p>
-              <Link
-                href="/corporate"
-                onClick={closeMenu}
-                className="font-display text-2xl text-white transition-colors hover:text-zinc-400 sm:text-3xl"
+
+              {[
+                { href: "/corporate",   label: "Project Art Corporate",    dim: false },
+                { href: "#businesses",  label: "Project Art Plus",          dim: true },
+                { href: "#businesses",  label: "Prime Project",             dim: true },
+                { href: "#businesses",  label: "Oneway Party Idea",         dim: true },
+              ].map(({ href, label, dim }, i) => (
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={closeMenu}
+                  style={{
+                    opacity: menuExpanded ? 1 : 0,
+                    transform: menuExpanded ? "translateY(0)" : "translateY(28px)",
+                    transition: menuExpanded
+                      ? `opacity 0.5s ${0.32 + i * 0.07}s ease, transform 0.5s ${0.32 + i * 0.07}s ease`
+                      : "opacity 0.1s ease, transform 0.1s ease",
+                  }}
+                  className={`font-display block py-3 text-3xl tracking-tight transition-colors hover:text-white sm:text-5xl ${
+                    dim ? "text-zinc-500" : "text-white"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+
+              {/* Inquire CTA */}
+              <div
+                style={{
+                  opacity: menuExpanded ? 1 : 0,
+                  transform: menuExpanded ? "translateY(0)" : "translateY(28px)",
+                  transition: menuExpanded
+                    ? "opacity 0.5s 0.6s ease, transform 0.5s 0.6s ease"
+                    : "opacity 0.1s ease",
+                  marginTop: "32px",
+                }}
               >
-                Project Art Corporate
-              </Link>
-              <Link
-                href="#businesses"
-                onClick={closeMenu}
-                className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
-              >
-                Project Art Plus (Weddings)
-              </Link>
-              <Link
-                href="#businesses"
-                onClick={closeMenu}
-                className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
-              >
-                Prime Project
-              </Link>
-              <Link
-                href="#businesses"
-                onClick={closeMenu}
-                className="font-display text-2xl text-zinc-300 transition-colors hover:text-white sm:text-3xl"
-              >
-                Oneway Party Idea
-              </Link>
-              <div className="pt-4">
                 <Link
                   href="/corporate#contact"
                   onClick={closeMenu}
-                  className="font-display text-2xl text-white underline decoration-white/40 underline-offset-8 transition-colors hover:text-zinc-300 sm:text-3xl"
+                  className="inline-flex items-center gap-3 rounded-full border border-white/25 px-7 py-3 text-sm tracking-widest text-white uppercase transition-all hover:bg-white hover:text-black"
                 >
-                  Inquire / Talk to Us →
+                  Inquire / Talk to Us
+                  <span className="text-base">→</span>
                 </Link>
               </div>
             </div>
 
-            <div className="border-t border-white/10 pt-6 text-xs text-zinc-500">
-              <p>Project Art Group · Founded in 2002</p>
-              <p className="mt-1">Surabaya, East Java, Indonesia</p>
+            {/* ── Footer strip inside menu ── */}
+            <div
+              style={{
+                opacity: menuExpanded ? 1 : 0,
+                transform: menuExpanded ? "translateY(0)" : "translateY(12px)",
+                transition: menuExpanded
+                  ? "opacity 0.4s 0.5s ease, transform 0.4s 0.5s ease"
+                  : "opacity 0.1s ease",
+                padding: "20px 48px",
+                borderTop: "1px solid rgba(255,255,255,0.07)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <p className="text-xs text-zinc-600">Project Art Group · Est. 2002</p>
+              <p className="text-xs text-zinc-600">Surabaya · Bali · Jakarta · Overseas</p>
             </div>
           </div>
         </div>
