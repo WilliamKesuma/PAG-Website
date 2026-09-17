@@ -1,43 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
 const studios = [
   {
-    number: "01",
-    title: "WEDDINGS",
-    subtitle: "ALL VISUAL STORIES",
-    meta: "PROJECT ART PLUS & PRIME PROJECT",
-    desc: "From high-glamour couture celebrations to bespoke intimate gatherings.",
-    href: "#businesses",
-  },
-  {
-    number: "02",
-    title: "CORPORATE",
-    subtitle: "INSTITUTIONAL & COMMERCIAL",
-    meta: "PROJECT ART CORPORATE",
-    desc: "End-to-end production for Singapore Airlines, CIMB, Mercedes-Benz, and global institutions.",
+    name: "Project Art Corporate",
+    category: "Corporate & Institutional",
+    tagline: "Galas, Grand Openings & Expos",
     href: "/corporate",
-    badge: "FEATURED STUDIO",
+    highlight: true,
   },
   {
-    number: "03",
-    title: "CELEBRATIONS",
-    subtitle: "PRIVATE EVENTS & PARTIES",
-    meta: "ONEWAY PARTY IDEA",
-    desc: "Birthdays, anniversaries, and high-energy celebration runs of show.",
+    name: "Project Art Plus",
+    category: "High-Glamour Weddings",
+    tagline: "Flagship Luxury Wedding Production",
     href: "#businesses",
+    highlight: false,
   },
   {
-    number: "04",
-    title: "EDITORIALS",
-    subtitle: "VIEW EDITORIAL ARCHIVE",
-    meta: "EST. 2002 · SURABAYA",
-    desc: "Two decades of bespoke spatial design, lighting, and stage craftsmanship.",
-    href: "#archive",
+    name: "Prime Project",
+    category: "Modern Weddings",
+    tagline: "Essential & Accessible Scaled Events",
+    href: "#businesses",
+    highlight: false,
+  },
+  {
+    name: "Oneway Party Idea",
+    category: "Celebrations & Parties",
+    tagline: "Birthdays & High-Energy Occasions",
+    href: "#businesses",
+    highlight: false,
+  },
+  {
+    name: "PAC Global Productions",
+    category: "Destination Events",
+    tagline: "Surabaya · Bali · Singapore · London",
+    href: "/corporate",
+    highlight: false,
   },
 ];
 
@@ -72,45 +74,58 @@ const businesses = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeHover, setActiveHover] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-void text-bone-soft selection:bg-brass selection:text-void">
-      {/* FULL-SCREEN EDITORIAL HERO SECTION */}
+      {/* Sleek ultra-thin top scroll progress indicator */}
+      <div
+        className="fixed top-0 left-0 z-50 h-[2px] bg-gradient-to-r from-brass via-brass-light to-brass transition-all duration-150"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* FULL-SCREEN HERO */}
       <section className="relative flex min-h-screen flex-col justify-between overflow-hidden">
-        {/* Cinematic Backdrop Image */}
+        {/* Background Image & Vignette */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <Image
             src="/hero-aerial.jpg"
             alt="Project Art Group luxury event venue"
             fill
             priority
-            className="object-cover object-center transition-transform duration-1000 ease-out"
-            style={{
-              transform: activeHover !== null ? "scale(1.03)" : "scale(1.0)",
-            }}
+            className="object-cover object-center scale-100 transition-transform duration-1000 ease-out"
           />
-          {/* Moody Luxury Gradient Overlays */}
-          <div className="absolute inset-0 bg-void/65 backdrop-brightness-75" />
-          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(16,17,20,0.85)_100%]" />
+          <div className="absolute inset-0 bg-void/70 backdrop-brightness-75" />
+          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(16,17,20,0.9)_100%]" />
         </div>
 
-        {/* Top Minimalist Luxury Header */}
+        {/* Top Minimalist Header */}
         <header className="relative z-30 flex items-center justify-between px-6 py-6 sm:px-12">
           {/* Left: Menu & Index */}
           <div className="flex items-center gap-6 text-xs tracking-widest text-bone-soft/80 uppercase">
             <button
               onClick={() => setMenuOpen(true)}
-              className="group flex items-center gap-2 transition-colors hover:text-brass-light"
+              className="group flex items-center gap-2.5 transition-colors hover:text-brass-light"
               aria-label="Open menu"
             >
               <span className="flex flex-col gap-1">
                 <span className="h-0.5 w-4 bg-bone-soft/80 transition-all group-hover:w-5 group-hover:bg-brass-light" />
-                <span className="h-0.5 w-3 bg-bone-soft/80 transition-all group-hover:w-5 group-hover:bg-brass-light" />
+                <span className="h-0.5 w-2.5 bg-bone-soft/80 transition-all group-hover:w-5 group-hover:bg-brass-light" />
               </span>
               <span>MENU</span>
             </button>
-            <span className="hidden text-bone-soft/40 sm:inline">|</span>
+            <span className="hidden text-bone-soft/30 sm:inline">|</span>
             <span className="hidden text-bone-soft/60 sm:inline">EST. 2002</span>
           </div>
 
@@ -119,8 +134,8 @@ export default function Home() {
             href="/"
             className="group flex flex-col items-center justify-center text-center"
           >
-            <span className="font-display text-2xl tracking-tight text-bone-soft transition-colors group-hover:text-brass-light sm:text-3xl">
-              Project Art
+            <span className="font-display text-xl tracking-tight text-bone-soft transition-colors group-hover:text-brass-light sm:text-2xl md:text-3xl">
+              Project Art Group
             </span>
           </Link>
 
@@ -147,54 +162,76 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Center: Stacked Editorial Hero Titles */}
-        <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
-          <div className="flex w-full flex-col items-center space-y-4 sm:space-y-6">
-            {studios.map((item, idx) => (
-              <div
-                key={item.title}
-                onMouseEnter={() => setActiveHover(idx)}
-                onMouseLeave={() => setActiveHover(null)}
-                className="group relative flex flex-col items-center transition-all duration-300"
-              >
-                {/* Micro Number & Label above or beside */}
-                <div className="flex items-center gap-3 text-[11px] tracking-widest text-bone-soft/60 uppercase transition-colors group-hover:text-brass-light">
-                  <span className="font-mono text-brass-light/80">{item.number}</span>
-                  {item.badge && (
-                    <span className="rounded-full border border-brass/50 bg-brass/20 px-2 py-0.5 text-[9px] text-brass-light">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
+        {/* Center: Single Grand "Project Art Group" Title + Carousel */}
+        <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-10 text-center">
+          <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-bone-soft/20 bg-void/50 px-4 py-1.5 text-[11px] tracking-widest text-brass-light uppercase backdrop-blur-md">
+            <span>Event Production &amp; Design</span>
+            <span className="text-bone-soft/40">·</span>
+            <span>Est. 2002</span>
+          </div>
 
-                {/* Giant Editorial Heading */}
-                <Link
-                  href={item.href}
-                  className="font-display text-4xl tracking-tight text-bone-soft transition-all duration-300 group-hover:scale-105 group-hover:tracking-wider group-hover:text-white sm:text-6xl md:text-7xl lg:text-8xl"
-                  style={{
-                    opacity: activeHover !== null && activeHover !== idx ? 0.4 : 1.0,
-                    textShadow: "0 2px 20px rgba(0,0,0,0.8)",
-                  }}
-                >
-                  {item.title}
-                </Link>
+          <h1
+            className="font-display text-5xl tracking-tight text-bone-soft transition-transform duration-500 sm:text-7xl md:text-8xl lg:text-9xl"
+            style={{ textShadow: "0 4px 30px rgba(0,0,0,0.85)" }}
+          >
+            Project Art Group
+          </h1>
 
-                {/* Editorial Subtitle Line */}
-                <div className="mt-1 flex items-center gap-2 text-xs tracking-widest text-bone-soft/70 uppercase transition-opacity group-hover:text-bone-soft sm:text-sm">
-                  <span>{item.subtitle}</span>
-                  <span className="text-bone-soft/30">/</span>
-                  <span className="text-[10px] text-brass-light/80 sm:text-xs">
-                    {item.meta}
-                  </span>
-                </div>
+          <p className="mt-4 max-w-lg text-xs tracking-widest text-bone-soft/75 uppercase sm:text-sm">
+            Four specialized studios · Surabaya · Bali · London
+          </p>
+
+          {/* SLEEK LOGO & STUDIOS CAROUSEL */}
+          <div className="mt-12 w-full max-w-4xl overflow-hidden py-4">
+            <div className="mb-3 flex items-center justify-between px-2 text-[10px] tracking-widest text-bone-soft/50 uppercase">
+              <span>OUR STUDIOS &amp; DIVISIONS</span>
+              <span className="hidden sm:inline">SWIPE / SCROLL →</span>
+            </div>
+
+            {/* Continuous Elegant Marquee Carousel */}
+            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+              <div className="animate-marquee flex gap-4 py-2">
+                {[...studios, ...studios].map((item, index) => (
+                  <Link
+                    key={`${item.name}-${index}`}
+                    href={item.href}
+                    className={`group flex min-w-[240px] flex-col justify-between rounded-xl border p-4 text-left transition-all hover:scale-105 sm:min-w-[280px] ${
+                      item.highlight
+                        ? "border-brass/60 bg-void/80 backdrop-blur-md hover:border-brass hover:bg-void"
+                        : "border-bone-soft/15 bg-void/60 backdrop-blur-md hover:border-bone-soft/40 hover:bg-void/80"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] tracking-widest text-brass-light uppercase">
+                        {item.category}
+                      </span>
+                      {item.highlight && (
+                        <span className="rounded-full bg-brass/30 px-2 py-0.5 text-[9px] text-brass-light">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-2 font-display text-lg tracking-tight text-bone-soft group-hover:text-brass-light">
+                      {item.name}
+                    </p>
+                    <p className="mt-1 text-xs text-bone-soft/60">{item.tagline}</p>
+                  </Link>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
-        {/* Bottom Minimalist Bar */}
-        <div className="relative z-20 flex flex-col items-center justify-between gap-4 border-t border-bone-soft/10 bg-void/30 px-6 py-5 text-[11px] tracking-widest text-bone-soft/60 uppercase backdrop-blur-xs sm:flex-row sm:px-12">
+        {/* Bottom Minimalist Bar with Sleek Scroll Indicator */}
+        <div className="relative z-20 flex flex-col items-center justify-between gap-4 border-t border-bone-soft/10 bg-void/40 px-6 py-5 text-[11px] tracking-widest text-bone-soft/60 uppercase backdrop-blur-xs sm:flex-row sm:px-12">
           <div>SURABAYA · BALI · JAKARTA · SINGAPORE · LONDON</div>
+
+          {/* Sleek thin animated scroll indicator */}
+          <div className="flex items-center gap-2 text-brass-light">
+            <span className="text-[10px]">SCROLL</span>
+            <span className="inline-block animate-bounce text-xs">↓</span>
+          </div>
+
           <div className="flex items-center gap-6">
             <span className="hidden sm:inline">&ldquo;TRUST IS A MUST&rdquo;</span>
             <span className="hidden text-bone-soft/20 sm:inline">|</span>
@@ -205,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SLIDE-OUT MENU DRAWER */}
+      {/* SLIDE-OUT MENU DRAWER (COMES OUT FROM THE LEFT) */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 flex">
           {/* Backdrop overlay */}
@@ -214,11 +251,11 @@ export default function Home() {
             className="absolute inset-0 bg-void/80 backdrop-blur-sm transition-opacity"
           />
 
-          {/* Drawer content */}
-          <div className="relative ml-auto flex h-full w-full max-w-md flex-col justify-between border-l border-bone-soft/10 bg-void p-8 sm:p-12">
-            <div className="flex items-center justify-between">
+          {/* Drawer content (aligned to LEFT) */}
+          <div className="relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-bone-soft/10 bg-void p-8 transition-transform duration-300 sm:p-12">
+            <div className="flex items-center justify-between border-b border-bone-soft/10 pb-6">
               <span className="font-display text-xl tracking-tight text-bone-soft">
-                Project Art
+                Project Art Group
               </span>
               <button
                 onClick={() => setMenuOpen(false)}
@@ -231,7 +268,7 @@ export default function Home() {
 
             <div className="my-auto flex flex-col space-y-6 text-left">
               <p className="text-xs tracking-widest text-brass-light uppercase">
-                Directory
+                Studios &amp; Directory
               </p>
               <Link
                 href="/corporate"
@@ -261,13 +298,15 @@ export default function Home() {
               >
                 Oneway Party Idea
               </Link>
-              <Link
-                href="/corporate#contact"
-                onClick={() => setMenuOpen(false)}
-                className="font-display text-2xl text-brass-light transition-colors hover:text-white sm:text-3xl"
-              >
-                Inquire / Talk to Us →
-              </Link>
+              <div className="pt-4">
+                <Link
+                  href="/corporate#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-display text-2xl text-brass-light transition-colors hover:text-white sm:text-3xl"
+                >
+                  Inquire / Talk to Us →
+                </Link>
+              </div>
             </div>
 
             <div className="border-t border-bone-soft/10 pt-6 text-xs text-bone-soft/50">
@@ -429,7 +468,7 @@ export default function Home() {
               href="/corporate"
               className="rounded-full border border-bone-soft/30 px-8 py-3.5 text-sm text-bone-soft transition-colors hover:border-brass hover:text-brass-light"
             >
-              Explore Services & Process
+              Explore Services &amp; Process
             </Link>
           </div>
         </div>
