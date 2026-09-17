@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --void: #101114;
-  --void-soft: #1a1c21;
-  --bone: #ece6d9;
-  --bone-soft: #f5f1e7;
-  --brass: #a9793d;
-  --brass-light: #cf9f5f;
-  --slate: #6f7480;
-  --slate-on-dark: #9a9fab;
-  --line-on-bone: rgba(16, 17, 20, 0.12);
-  --line-on-void: rgba(236, 230, 217, 0.14);
+  --void: #0a0a0a;
+  --void-soft: #141414;
+  --bone: #ffffff;
+  --bone-soft: #f4f4f5;
+  --brass: #ffffff;
+  --brass-light: #e4e4e7;
+  --slate: #71717a;
+  --slate-on-dark: #a1a1aa;
+  --line-on-bone: rgba(0, 0, 0, 0.08);
+  --line-on-void: rgba(255, 255, 255, 0.12);
 }
 
 @theme inline {
@@ -27,25 +27,6 @@
   --font-signature: "Pinyon Script", cursive;
 }
 
-/* Ultra-sleek thin scrollbar */
-::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(16, 17, 20, 0.8);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--brass);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--brass-light);
-}
-
 /* Custom marquee animations for logo carousel */
 @keyframes marquee {
   0% {
@@ -59,7 +40,7 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -67,8 +48,8 @@
 }
 
 body {
-  background: var(--bone);
-  color: var(--void);
+  background: var(--void);
+  color: var(--bone-soft);
   font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -85,8 +66,8 @@ h3,
 }
 
 ::selection {
-  background: var(--brass);
-  color: var(--bone-soft);
+  background: #ffffff;
+  color: #000000;
 }
 
 .rule-bone {
