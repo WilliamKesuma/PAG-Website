@@ -11,13 +11,33 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-12">
         <div className="grid gap-12 sm:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-display text-xl tracking-tight text-white">
-              Project Art Group
-            </p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-zinc-400">
-              Four studios, one standard for how an event gets built. Trust is a must —
-              since 2002.
-            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-4">
+              <img
+                src="/logos/LOGO PA GROUP PUTIH.png"
+                alt="Studio 1 Logo"
+                className="h-8 w-auto object-contain max-w-[120px]"
+              />
+              <img
+                src="/logos/LOGO PA CORP WHITE.png"
+                alt="Studio 1 Logo"
+                className="h-8 w-auto object-contain max-w-[120px]"
+              />
+              <img
+                src="/logos/LOGO PA WHITE.png"
+                alt="Studio 2 Logo"
+                className="h-8 w-auto object-contain max-w-[120px]"
+              />
+              <img
+                src="/logos/LOGO PP PUTIH.png"
+                alt="Studio 3 Logo"
+                className="h-8 w-auto object-contain max-w-[120px]"
+              />
+              <img
+                src="/logos/LOGO ONEWAY WHITE.png"
+                alt="Studio 4 Logo"
+                className="h-8 w-auto object-contain max-w-[120px]"
+              />
+            </div>
           </div>
           <div>
             <p className="text-xs uppercase tracking-widest text-zinc-500">
@@ -33,16 +53,43 @@ export default function Footer() {
           </div>
           <div id="contact">
             <p className="text-xs uppercase tracking-widest text-zinc-500">
-              Project Art Corporate
+              Project Art Group
             </p>
             <ul className="mt-4 space-y-2.5 text-sm text-zinc-300">
-              <li>business@projectartplus.co.id</li>
-              <li>+62 31 734 8569</li>
-              <li>WhatsApp +62 811 3496 269</li>
-              <li className="text-zinc-500 pt-1">
-                Ruko Satelit Town Square Blok D-21,
+              <li>
+                <a
+                  href="mailto:business@projectartplus.co.id"
+                  className="hover:text-white transition-colors"
+                >
+                  Mail: business@projectartplus.co.id
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/628113496269"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  WhatsApp: +62 811 3496 269
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://instagram.com/ProjectArt.Corporate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Instagram: @ProjectArt.Corporate
+                </a>
+              </li>
+              <li className="text-zinc-500 pt-1 leading-relaxed">
+                Ruko Satelit Town Square Blok D-21
                 <br />
-                Jl. Raya Sukomanunggal Jaya, Surabaya
+                Jl. Raya Sukomanunggal Jaya
+                <br />
+                Surabaya - Indonesia
               </li>
             </ul>
           </div>

@@ -9,56 +9,64 @@ import Footer from "@/components/Footer";
 const brandLogos = [
   {
     name: "Project Art Corporate",
-    src: "/logos/LOGO PA CORP WHITE.png",
+    tag: "Corporate & Institutional",
+    description: "Your description here...",
     href: "/corporate",
-    category: "Corporate & Institutional",
+    logo: "/logos/LOGO PA CORP WHITE.png",
   },
   {
     name: "Project Art Plus",
-    src: "/logos/LOGO PA WHITE.png",
+    tag: "Luxury Weddings",
+    description: "Your description here...",
     href: "#businesses",
-    category: "Luxury Weddings",
+    logo: "/logos/LOGO PA WHITE.png",
   },
   {
     name: "Prime Project",
-    src: "/logos/LOGO PP PUTIH.png",
+    tag: "Modern Weddings",
+    description: "Your description here...",
     href: "#businesses",
-    category: "Modern Weddings",
+    logo: "/logos/LOGO PP PUTIH.png",
   },
   {
     name: "Oneway Party Idea",
-    src: "/logos/LOGO ONEWAY WHITE.png",
+    tag: "Celebrations & Parties",
+    description: "Your description here...",
     href: "#businesses",
-    category: "Celebrations & Parties",
+    logo: "/logos/LOGO ONEWAY WHITE.png",
   },
 ];
 
 const businesses = [
   {
     name: "Project Art Corporate",
-    tag: "Corporate & institutional events",
+    tag: "Corporate & Institutional Events",
     description:
       "Grand openings, galas, awards nights, expos, and launches — every corporate event that isn't a wedding. Run end to end since 2002 for names like Singapore Airlines, CIMB, and Mercedes-Benz.",
     href: "/corporate",
     featured: true,
+    logo: "/logos/LOGO PA CORP WHITE.png",
   },
   {
     name: "Project Art Plus",
-    tag: "Weddings",
+    tag: "Glamourous Weddings",
     description:
       "The flagship studio — high-glamour weddings built from concept to the last dance.",
+    logo: "/logos/LOGO PA WHITE.png",
   },
   {
     name: "Prime Project",
-    tag: "Weddings",
+    tag: "Intimate Weddings",
     description:
       "Weddings built around what a couple actually needs, at a more accessible scale.",
+    logo: "/logos/LOGO PP PUTIH.png",
   },
   {
     name: "Oneway Party Idea",
-    tag: "Celebrations",
+    tag: "Celebrations & Parties",
     description:
       "Birthdays, parties, and the everyday celebrations that still deserve a good run of show.",
+    logo: "/logos/LOGO ONEWAY WHITE.png",
   },
 ];
 
@@ -183,7 +191,7 @@ export default function Home() {
                   >
                     <div className="relative h-14 w-40 sm:h-16 sm:w-48">
                       <Image
-                        src={logo.src}
+                        src={logo.logo}
                         alt={logo.name}
                         fill
                         className="object-contain filter transition-all duration-300 group-hover:brightness-125"
@@ -205,12 +213,10 @@ export default function Home() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
           style={{
-            // Overlay fades in/out
             background: menuExpanded ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0)",
             transition: "background 0.55s cubic-bezier(0.4,0,0.2,1)",
           }}
         >
-          {/* The panel that grows from a thin line → full screen */}
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -230,7 +236,6 @@ export default function Home() {
               overflow: "hidden",
             }}
           >
-            {/* ── Thin accent line visible while panel is collapsed ── */}
             <div
               style={{
                 position: "absolute",
@@ -245,7 +250,6 @@ export default function Home() {
               }}
             />
 
-            {/* ── Header bar inside menu ── */}
             <div
               style={{
                 opacity: menuExpanded ? 1 : 0,
@@ -280,10 +284,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* ── Nav links with staggered fade-up ── */}
-            <div
-              className="flex flex-1 flex-col justify-center px-12 sm:px-20"
-            >
+            <div className="flex flex-1 flex-col justify-center px-12 sm:px-20">
               <p
                 style={{
                   opacity: menuExpanded ? 1 : 0,
@@ -321,7 +322,6 @@ export default function Home() {
                 </Link>
               ))}
 
-              {/* Inquire CTA */}
               <div
                 style={{
                   opacity: menuExpanded ? 1 : 0,
@@ -343,7 +343,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ── Footer strip inside menu ── */}
             <div
               style={{
                 opacity: menuExpanded ? 1 : 0,
@@ -364,7 +363,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
 
       {/* ABOUT & HERITAGE SECTION */}
       <section
@@ -388,7 +386,6 @@ export default function Home() {
                 href="/corporate#contact"
                 className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white"
               >
-                {/* Wipe fill — grows left → right on hover */}
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-out group-hover:scale-x-100"
@@ -445,7 +442,19 @@ export default function Home() {
                 "group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-950 p-8 text-white transition-all duration-300 hover:border-white/40 hover:bg-zinc-900";
               const inner = (
                 <>
-                  <div>
+                  {/* Top Right Studio Logo */}
+                  {b.logo && (
+                    <div className="absolute top-8 right-8 h-8 w-24">
+                      <Image
+                        src={b.logo}
+                        alt={`${b.name} logo`}
+                        fill
+                        className="object-contain object-right opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                      />
+                    </div>
+                  )}
+
+                  <div className="pr-20">
                     <p className="text-xs tracking-widest text-zinc-400 uppercase">
                       {b.tag}
                     </p>
@@ -456,8 +465,9 @@ export default function Home() {
                       {b.description}
                     </p>
                   </div>
+
                   <span className="mt-8 inline-flex items-center gap-2 text-xs tracking-widest text-zinc-600 uppercase transition-colors duration-300 group-hover:text-white">
-                    {isLinked ? "View Studio →" : "Coming soon"}
+                    {isLinked ? "View Studio →" : "View Studio →"}
                   </span>
                 </>
               );
@@ -482,24 +492,9 @@ export default function Home() {
             &ldquo;Trust is a must.&rdquo;
           </p>
           <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-zinc-400 sm:text-base">
-            That&apos;s been Project Art Group&apos;s line since 2002, and it&apos;s still
-            what most companies call us for — the event they can&apos;t afford to get
-            wrong.
+            Our Moto since 2002, and it&apos;s still
+            why we stay true to deliver and serve you
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/corporate#contact"
-              className="rounded-full bg-white px-8 py-3.5 text-sm font-medium text-black transition-colors hover:bg-zinc-200"
-            >
-              Talk to Project Art Corporate
-            </Link>
-            <Link
-              href="/corporate"
-              className="rounded-full border border-white/30 px-8 py-3.5 text-sm text-white transition-colors hover:border-white hover:bg-white/10"
-            >
-              Explore Services &amp; Process
-            </Link>
-          </div>
         </div>
       </section>
 
