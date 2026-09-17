@@ -5,31 +5,27 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
-// Studio Brand Logos for the Carousel - Normalized optical sizes
+// Studio Brand Logos for the Carousel - Using user's updated logo files
 const brandLogos = [
   {
     name: "Project Art Plus",
     src: "/logos/Logo PA Mix White.png",
     href: "#businesses",
-    imgClass: "h-9 sm:h-11 w-auto max-w-[130px] object-contain",
   },
   {
     name: "Oneway Party Idea",
     src: "/logos/LOGO ONEWAY WHITE.png",
     href: "#businesses",
-    imgClass: "h-6 sm:h-7 w-auto max-w-[150px] object-contain",
   },
   {
     name: "Project Art Corporate",
-    src: "/logos/PAP_Project Art Corp Logo W-02.png",
+    src: "/logos/PAP_Project Art Corp Logo BIG.png",
     href: "/corporate",
-    imgClass: "h-8 sm:h-10 w-auto max-w-[140px] object-contain",
   },
   {
     name: "Prime Project",
-    src: "/logos/PP PUTIH.png",
+    src: "/logos/PP PUTIH copy.png",
     href: "#businesses",
-    imgClass: "h-9 sm:h-11 w-auto max-w-[120px] object-contain",
   },
 ];
 
@@ -148,7 +144,7 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Center Content: Single Project Art Group Heading + Tight Normalized Logo Carousel */}
+        {/* Center Content: Single Project Art Group Heading + Full-Size Natural Aspect Ratio Logo Carousel */}
         <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
           <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
             <span>Event Production &amp; Design</span>
@@ -167,23 +163,23 @@ export default function Home() {
             Surabaya · Bali · Jakarta · Overseas
           </p>
 
-          {/* TIGHT, UNIFORM SIZE LOGO CAROUSEL */}
-          <div className="mt-12 w-full max-w-3xl overflow-hidden py-3">
-            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-              <div className="animate-marquee flex items-center gap-8 sm:gap-12 py-3">
+          {/* PROMINENT, UNCONSTRAINED FULL LOGO CAROUSEL */}
+          <div className="mt-14 w-full max-w-4xl overflow-hidden py-4">
+            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+              <div className="animate-marquee flex items-center gap-12 sm:gap-16 py-4">
                 {[...brandLogos, ...brandLogos, ...brandLogos, ...brandLogos].map(
                   (logo, index) => (
                     <Link
                       key={`${logo.name}-${index}`}
                       href={logo.href}
-                      className="group flex h-14 shrink-0 items-center justify-center opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-110"
+                      className="group flex shrink-0 items-center justify-center opacity-85 transition-all duration-300 hover:opacity-100 hover:scale-105"
                       title={logo.name}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={logo.src}
                         alt={logo.name}
-                        className={`${logo.imgClass} filter transition-all duration-300 group-hover:brightness-125`}
+                        className="h-14 sm:h-16 w-auto max-h-20 object-contain filter transition-all duration-300 group-hover:brightness-125"
                       />
                     </Link>
                   )
