@@ -114,12 +114,12 @@ export default function Home() {
             <span className="hidden text-bone-soft/60 sm:inline">EST. 2002</span>
           </div>
 
-          {/* Center: Signature Script Logo */}
+          {/* Center: Brand Logo */}
           <Link
             href="/"
             className="group flex flex-col items-center justify-center text-center"
           >
-            <span className="font-signature text-3xl tracking-wide text-bone-soft transition-colors group-hover:text-brass-light sm:text-4xl">
+            <span className="font-display text-2xl tracking-tight text-bone-soft transition-colors group-hover:text-brass-light sm:text-3xl">
               Project Art
             </span>
           </Link>
@@ -217,7 +217,9 @@ export default function Home() {
           {/* Drawer content */}
           <div className="relative ml-auto flex h-full w-full max-w-md flex-col justify-between border-l border-bone-soft/10 bg-void p-8 sm:p-12">
             <div className="flex items-center justify-between">
-              <span className="font-signature text-2xl text-bone-soft">Project Art</span>
+              <span className="font-display text-xl tracking-tight text-bone-soft">
+                Project Art
+              </span>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="rounded-full border border-bone-soft/20 p-2 text-xs text-bone-soft transition-colors hover:border-brass hover:text-brass-light"
