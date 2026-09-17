@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --void: #101114;
+  --void-soft: #1a1c21;
+  --bone: #ece6d9;
+  --bone-soft: #f5f1e7;
+  --brass: #a9793d;
+  --brass-light: #cf9f5f;
+  --slate: #6f7480;
+  --slate-on-dark: #9a9fab;
+  --line-on-bone: rgba(16, 17, 20, 0.12);
+  --line-on-void: rgba(236, 230, 217, 0.14);
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-void-soft: var(--void-soft);
+  --color-bone: var(--bone);
+  --color-bone-soft: var(--bone-soft);
+  --color-brass: var(--brass);
+  --color-brass-light: var(--brass-light);
+  --color-slate: var(--slate);
+  --color-slate-on-dark: var(--slate-on-dark);
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--bone);
+  color: var(--void);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+::selection {
+  background: var(--brass);
+  color: var(--bone-soft);
+}
+
+.rule-bone {
+  border-color: var(--line-on-bone);
+}
+
+.rule-void {
+  border-color: var(--line-on-void);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
