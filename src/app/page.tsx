@@ -395,9 +395,16 @@ export default function Home() {
               </Link>
               <Link
                 href="/corporate#contact"
-                className="rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors hover:border-white hover:bg-white/10"
+                className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white"
               >
-                Inquire for Your Event
+                {/* Wipe fill: grows from left on hover */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-out group-hover:scale-x-100"
+                />
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+                  Inquire for Your Event
+                </span>
               </Link>
             </div>
           </div>
@@ -445,46 +452,42 @@ export default function Home() {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {businesses.map((b) =>
-              b.featured ? (
-                <Link
-                  key={b.name}
-                  href={b.href!}
-                  className="group flex flex-col justify-between rounded-2xl border border-white/20 bg-zinc-950 p-8 text-white transition-all hover:border-white hover:bg-zinc-900 sm:col-span-2 sm:flex-row sm:items-end"
-                >
-                  <div className="max-w-xl">
-                    <p className="text-xs tracking-widest text-zinc-400 uppercase">
-                      {b.tag}
-                    </p>
-                    <h3 className="mt-2 font-display text-2xl text-white group-hover:text-zinc-200 sm:text-3xl">
-                      {b.name}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-                      {b.description}
-                    </p>
-                  </div>
-                  <span className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full border border-white/30 bg-white/5 px-5 py-2.5 text-sm text-white transition-colors group-hover:bg-white group-hover:text-black sm:mt-0">
-                    View Corporate Studio →
-                  </span>
-                </Link>
-              ) : (
-                <div
-                  key={b.name}
-                  className="flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-950 p-8 text-white"
-                >
+            {businesses.map((b) => {
+              const isLinked = !!b.href;
+              const cardClass =
+                "group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-950 p-8 text-white transition-all duration-300 hover:border-white/40 hover:bg-zinc-900";
+              const inner = (
+                <>
                   <div>
                     <p className="text-xs tracking-widest text-zinc-400 uppercase">
                       {b.tag}
                     </p>
-                    <h3 className="mt-2 font-display text-2xl text-white">{b.name}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                    <h3 className="mt-3 font-display text-2xl text-white sm:text-3xl">
+                      {b.name}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-zinc-500">
                       {b.description}
                     </p>
                   </div>
-                  <p className="mt-6 text-xs text-zinc-600">Studio page in progress</p>
+                  <span className="mt-8 inline-flex items-center gap-2 text-xs tracking-widest text-zinc-600 uppercase transition-colors duration-300 group-hover:text-white">
+                    {isLinked ? "View Studio →" : "Coming soon"}
+                  </span>
+                </>
+              );
+              return isLinked ? (
+                <Link
+                  key={b.name}
+                  href={b.href!}
+                  className={cardClass}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div key={b.name} className={cardClass}>
+                  {inner}
                 </div>
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </section>
