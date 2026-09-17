@@ -68,20 +68,18 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
       {/* 1. FIRST SECTION WITH BACKGROUND PICTURE (NO FOOTER) */}
-      <section className="relative flex min-h-screen flex-col justify-between overflow-hidden">
-        {/* Background Image & Moody Vignette */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <Image
-            src="/hero-aerial.jpg"
-            alt="Project Art Group luxury event venue"
-            fill
-            priority
-            className="object-cover object-center"
-          />
-          {/* Black & Grey Moody Overlays */}
-          <div className="absolute inset-0 bg-black/75 backdrop-brightness-75" />
-          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(0,0,0,0.95)_100%]" />
-        </div>
+      <section
+        className="relative flex min-h-screen flex-col justify-between overflow-hidden"
+        style={{
+          backgroundImage: "url('/hero-aerial.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Cinematic overlay gradients */}
+        <div className="absolute inset-0 z-0 pointer-events-none bg-black/50" />
+        <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-transparent to-black/85" />
 
         {/* Top Minimalist Header */}
         <header className="relative z-30 flex items-center justify-between px-6 py-8 sm:px-12">
