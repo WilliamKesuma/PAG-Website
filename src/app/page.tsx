@@ -5,31 +5,31 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
-// Studio Brand Logos for the Carousel using your uploaded images
+// Studio Brand Logos for the Carousel - Normalized optical sizes
 const brandLogos = [
-  {
-    name: "Project Art Corporate",
-    src: "/logos/PAP_Project Art Corp Logo W-02.png",
-    href: "/corporate",
-    category: "Corporate & Institutional",
-  },
   {
     name: "Project Art Plus",
     src: "/logos/Logo PA Mix White.png",
     href: "#businesses",
-    category: "Luxury Weddings",
-  },
-  {
-    name: "Prime Project",
-    src: "/logos/PP PUTIH.png",
-    href: "#businesses",
-    category: "Modern Weddings",
+    imgClass: "h-9 sm:h-11 w-auto max-w-[130px] object-contain",
   },
   {
     name: "Oneway Party Idea",
     src: "/logos/LOGO ONEWAY WHITE.png",
     href: "#businesses",
-    category: "Celebrations & Parties",
+    imgClass: "h-6 sm:h-7 w-auto max-w-[150px] object-contain",
+  },
+  {
+    name: "Project Art Corporate",
+    src: "/logos/PAP_Project Art Corp Logo W-02.png",
+    href: "/corporate",
+    imgClass: "h-8 sm:h-10 w-auto max-w-[140px] object-contain",
+  },
+  {
+    name: "Prime Project",
+    src: "/logos/PP PUTIH.png",
+    href: "#businesses",
+    imgClass: "h-9 sm:h-11 w-auto max-w-[120px] object-contain",
   },
 ];
 
@@ -67,9 +67,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
-      {/* 1. FIRST SECTION WITH VISIBLE BACKGROUND PICTURE (NO FOOTER) */}
+      {/* 1. FIRST SECTION WITH VISIBLE BACKGROUND PICTURE */}
       <section className="relative flex min-h-screen flex-col justify-between overflow-hidden">
-        {/* Background Image & Balanced Vignette */}
+        {/* Background Image & Vignette */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
             src="/hero-aerial.jpg"
@@ -79,18 +79,32 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Balanced cinematic overlay so the background photo is clearly seen */}
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/85" />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-black/90" />
         </div>
 
         {/* Top Minimalist Header */}
         <header className="relative z-30 flex items-center justify-between px-6 py-6 sm:px-12">
-          {/* Left: Menu & Index */}
-          <div className="flex items-center gap-6 text-xs tracking-widest text-zinc-300 uppercase">
+          {/* Left: Project Art Group Logo + Menu Button */}
+          <div className="flex items-center gap-5 sm:gap-7">
+            <Link
+              href="/"
+              title="Project Art Group — Home"
+              className="flex shrink-0 items-center transition-transform hover:scale-105"
+            >
+              <Image
+                src="/logos/Logo PA Group white.png"
+                alt="Project Art Group Logo"
+                width={48}
+                height={48}
+                priority
+                className="h-8 w-auto object-contain sm:h-10"
+              />
+            </Link>
+
             <button
               onClick={() => setMenuOpen(true)}
-              className="group flex items-center gap-2.5 transition-colors hover:text-white"
+              className="group flex items-center gap-2.5 text-xs tracking-widest text-zinc-300 uppercase transition-colors hover:text-white"
               aria-label="Open menu"
             >
               <span className="flex flex-col gap-1">
@@ -99,21 +113,19 @@ export default function Home() {
               </span>
               <span>MENU</span>
             </button>
-            <span className="hidden text-zinc-600 sm:inline">|</span>
-            <span className="hidden text-zinc-400 sm:inline">EST. 2002</span>
           </div>
 
           {/* Center: Brand Title */}
           <Link
             href="/"
-            className="group flex flex-col items-center justify-center text-center"
+            className="group hidden sm:flex flex-col items-center justify-center text-center"
           >
-            <span className="font-display text-xl tracking-tight text-white transition-opacity group-hover:opacity-80 sm:text-2xl md:text-3xl">
+            <span className="font-display text-xl tracking-tight text-white transition-opacity group-hover:opacity-80 md:text-2xl">
               Project Art Group
             </span>
           </Link>
 
-          {/* Right: Navigation Links, Inquire Pill & Home Logo */}
+          {/* Right: Navigation Links & Inquire Button */}
           <div className="flex items-center gap-4 text-xs tracking-widest text-zinc-300 uppercase sm:gap-6">
             <Link
               href="#about"
@@ -129,29 +141,14 @@ export default function Home() {
             </Link>
             <Link
               href="/corporate#contact"
-              className="hidden rounded-full border border-white/30 px-4 py-1.5 text-white transition-all hover:border-white hover:bg-white hover:text-black sm:inline"
+              className="rounded-full border border-white/30 px-5 py-2 text-white transition-all hover:border-white hover:bg-white hover:text-black"
             >
               INQUIRE
-            </Link>
-
-            {/* Top Right Logo Icon that navigates back to Home */}
-            <Link
-              href="/"
-              title="Project Art Group — Home"
-              className="flex items-center transition-all hover:scale-105 hover:opacity-90"
-            >
-              <Image
-                src="/logos/Logo PA Group white.png"
-                alt="Project Art Group Logo"
-                width={48}
-                height={48}
-                className="h-9 w-auto object-contain sm:h-11"
-              />
             </Link>
           </div>
         </header>
 
-        {/* Center Content: Single Project Art Group Heading + Image Logo Carousel */}
+        {/* Center Content: Single Project Art Group Heading + Tight Normalized Logo Carousel */}
         <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
           <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
             <span>Event Production &amp; Design</span>
@@ -170,34 +167,34 @@ export default function Home() {
             Surabaya · Bali · Jakarta · Overseas
           </p>
 
-          {/* IMAGE-BASED LOGO CAROUSEL */}
-          <div className="mt-14 w-full max-w-4xl overflow-hidden py-4">
+          {/* TIGHT, UNIFORM SIZE LOGO CAROUSEL */}
+          <div className="mt-12 w-full max-w-3xl overflow-hidden py-3">
             <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-              <div className="animate-marquee flex items-center gap-14 sm:gap-20 py-4">
-                {[...brandLogos, ...brandLogos, ...brandLogos].map((logo, index) => (
-                  <Link
-                    key={`${logo.name}-${index}`}
-                    href={logo.href}
-                    className="group flex shrink-0 items-center justify-center opacity-75 transition-all duration-300 hover:opacity-100 hover:scale-110"
-                    title={logo.name}
-                  >
-                    <div className="relative h-12 w-36 sm:h-16 sm:w-44">
-                      <Image
+              <div className="animate-marquee flex items-center gap-8 sm:gap-12 py-3">
+                {[...brandLogos, ...brandLogos, ...brandLogos, ...brandLogos].map(
+                  (logo, index) => (
+                    <Link
+                      key={`${logo.name}-${index}`}
+                      href={logo.href}
+                      className="group flex h-14 shrink-0 items-center justify-center opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-110"
+                      title={logo.name}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={logo.src}
                         alt={logo.name}
-                        fill
-                        className="object-contain filter transition-all duration-300 group-hover:brightness-125"
+                        className={`${logo.imgClass} filter transition-all duration-300 group-hover:brightness-125`}
                       />
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Empty bottom spacer for perfect vertical centering */}
-        <div className="h-8" />
+        {/* Empty bottom spacer for balance */}
+        <div className="h-6" />
       </section>
 
       {/* SLIDE-OUT MENU DRAWER (FROM LEFT) */}
@@ -209,7 +206,7 @@ export default function Home() {
             className="absolute inset-0 bg-black/85 backdrop-blur-sm transition-opacity"
           />
 
-          {/* Drawer (Left Aligned, Black & Grey Luxury) */}
+          {/* Drawer (Left Aligned) */}
           <div className="relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-white/10 bg-zinc-950 p-8 text-white transition-transform duration-300 sm:p-12">
             <div className="flex items-center justify-between border-b border-white/10 pb-6">
               <div className="flex items-center gap-3">
