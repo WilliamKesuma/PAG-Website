@@ -22,8 +22,8 @@
   --color-brass-light: var(--brass-light);
   --color-slate: var(--slate);
   --color-slate-on-dark: var(--slate-on-dark);
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Baskervville", ui-serif, Georgia, serif;
+  --font-body: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {

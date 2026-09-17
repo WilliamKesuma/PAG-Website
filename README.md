@@ -41,5 +41,5 @@ Then open http://localhost:3000
   rather than as logo images. Drop real logo files into `/public` and swap
   them in `Nav.tsx`, `Footer.tsx`, and the homepage business cards whenever
   you have them.
-- Fonts (Fraunces + Work Sans) are self-hosted via `@fontsource`, so there's
+- Fonts (Baskervville + Montserrat) are self-hosted via `@fontsource`, so there's
   no external font-loading dependency at build or runtime.
