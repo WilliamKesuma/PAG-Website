@@ -5,29 +5,29 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
-// Studio Brand Logos for the Carousel
+// Studio Brand Logos for the Carousel using your uploaded images
 const brandLogos = [
   {
     name: "Project Art Corporate",
-    src: "/logos/logo-pac.svg",
+    src: "/logos/PAP_Project Art Corp Logo W-02.png",
     href: "/corporate",
     category: "Corporate & Institutional",
   },
   {
     name: "Project Art Plus",
-    src: "/logos/logo-pap.svg",
+    src: "/logos/Logo PA Mix White.png",
     href: "#businesses",
     category: "Luxury Weddings",
   },
   {
     name: "Prime Project",
-    src: "/logos/logo-prime.svg",
+    src: "/logos/PP PUTIH.png",
     href: "#businesses",
     category: "Modern Weddings",
   },
   {
     name: "Oneway Party Idea",
-    src: "/logos/logo-oneway.svg",
+    src: "/logos/LOGO ONEWAY WHITE.png",
     href: "#businesses",
     category: "Celebrations & Parties",
   },
@@ -67,42 +67,43 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
-      {/* 1. FIRST SECTION WITH BACKGROUND PICTURE (NO FOOTER) */}
+      {/* 1. FIRST SECTION WITH VISIBLE BACKGROUND PICTURE (NO FOOTER) */}
       <section className="relative flex min-h-screen flex-col justify-between overflow-hidden">
-        {/* Background Image & Moody Vignette */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Background Image & Balanced Vignette */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
             src="/hero-aerial.jpg"
             alt="Project Art Group luxury event venue"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Black & Grey Moody Overlays */}
-          <div className="absolute inset-0 bg-black/75 backdrop-brightness-75" />
-          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(0,0,0,0.95)_100%]" />
+          {/* Balanced cinematic overlay so the background photo is clearly seen */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/85" />
         </div>
 
         {/* Top Minimalist Header */}
-        <header className="relative z-30 flex items-center justify-between px-6 py-8 sm:px-12">
+        <header className="relative z-30 flex items-center justify-between px-6 py-6 sm:px-12">
           {/* Left: Menu & Index */}
-          <div className="flex items-center gap-6 text-xs tracking-widest text-zinc-400 uppercase">
+          <div className="flex items-center gap-6 text-xs tracking-widest text-zinc-300 uppercase">
             <button
               onClick={() => setMenuOpen(true)}
               className="group flex items-center gap-2.5 transition-colors hover:text-white"
               aria-label="Open menu"
             >
               <span className="flex flex-col gap-1">
-                <span className="h-0.5 w-4 bg-zinc-400 transition-all group-hover:w-5 group-hover:bg-white" />
-                <span className="h-0.5 w-2.5 bg-zinc-400 transition-all group-hover:w-5 group-hover:bg-white" />
+                <span className="h-0.5 w-4 bg-zinc-300 transition-all group-hover:w-5 group-hover:bg-white" />
+                <span className="h-0.5 w-2.5 bg-zinc-300 transition-all group-hover:w-5 group-hover:bg-white" />
               </span>
               <span>MENU</span>
             </button>
             <span className="hidden text-zinc-600 sm:inline">|</span>
-            <span className="hidden text-zinc-500 sm:inline">EST. 2002</span>
+            <span className="hidden text-zinc-400 sm:inline">EST. 2002</span>
           </div>
 
-          {/* Center: Brand Name in Baskerville */}
+          {/* Center: Brand Title */}
           <Link
             href="/"
             className="group flex flex-col items-center justify-center text-center"
@@ -112,8 +113,8 @@ export default function Home() {
             </span>
           </Link>
 
-          {/* Right: Navigation Links & Inquire Pill */}
-          <div className="flex items-center gap-5 text-xs tracking-widest text-zinc-400 uppercase sm:gap-7">
+          {/* Right: Navigation Links, Inquire Pill & Home Logo */}
+          <div className="flex items-center gap-4 text-xs tracking-widest text-zinc-300 uppercase sm:gap-6">
             <Link
               href="#about"
               className="hidden transition-colors hover:text-white sm:inline"
@@ -128,18 +129,33 @@ export default function Home() {
             </Link>
             <Link
               href="/corporate#contact"
-              className="rounded-full border border-white/30 px-5 py-2 text-white transition-all hover:border-white hover:bg-white hover:text-black"
+              className="hidden rounded-full border border-white/30 px-4 py-1.5 text-white transition-all hover:border-white hover:bg-white hover:text-black sm:inline"
             >
               INQUIRE
+            </Link>
+
+            {/* Top Right Logo Icon that navigates back to Home */}
+            <Link
+              href="/"
+              title="Project Art Group — Home"
+              className="flex items-center transition-all hover:scale-105 hover:opacity-90"
+            >
+              <Image
+                src="/logos/Logo PA Group white.png"
+                alt="Project Art Group Logo"
+                width={48}
+                height={48}
+                className="h-9 w-auto object-contain sm:h-11"
+              />
             </Link>
           </div>
         </header>
 
         {/* Center Content: Single Project Art Group Heading + Image Logo Carousel */}
-        <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-16 text-center">
-          <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
+        <div className="relative z-20 mx-auto my-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
+          <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
             <span>Event Production &amp; Design</span>
-            <span className="text-zinc-600">·</span>
+            <span className="text-zinc-500">·</span>
             <span>Est. 2002</span>
           </div>
 
@@ -150,22 +166,22 @@ export default function Home() {
             Project Art Group
           </h1>
 
-          <p className="mt-4 max-w-lg text-xs tracking-widest text-zinc-400 uppercase sm:text-sm">
-            Four specialized studios · Surabaya · Bali · London
+          <p className="mt-4 max-w-lg text-xs tracking-widest text-zinc-300 uppercase sm:text-sm">
+            Surabaya · Bali · Jakarta · Overseas
           </p>
 
-          {/* IMAGE-BASED LOGO CAROUSEL (CLEAN LOGOS WITHOUT CARDS) */}
-          <div className="mt-16 w-full max-w-4xl overflow-hidden py-4">
+          {/* IMAGE-BASED LOGO CAROUSEL */}
+          <div className="mt-14 w-full max-w-4xl overflow-hidden py-4">
             <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-              <div className="animate-marquee flex items-center gap-16 py-4">
+              <div className="animate-marquee flex items-center gap-14 sm:gap-20 py-4">
                 {[...brandLogos, ...brandLogos, ...brandLogos].map((logo, index) => (
                   <Link
                     key={`${logo.name}-${index}`}
                     href={logo.href}
-                    className="group flex shrink-0 items-center justify-center opacity-70 transition-all duration-300 hover:opacity-100 hover:scale-105"
+                    className="group flex shrink-0 items-center justify-center opacity-75 transition-all duration-300 hover:opacity-100 hover:scale-110"
                     title={logo.name}
                   >
-                    <div className="relative h-14 w-40 sm:h-16 sm:w-48">
+                    <div className="relative h-12 w-36 sm:h-16 sm:w-44">
                       <Image
                         src={logo.src}
                         alt={logo.name}
@@ -180,8 +196,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Empty bottom spacer for perfect vertical balance */}
-        <div className="h-10" />
+        {/* Empty bottom spacer for perfect vertical centering */}
+        <div className="h-8" />
       </section>
 
       {/* SLIDE-OUT MENU DRAWER (FROM LEFT) */}
@@ -196,9 +212,18 @@ export default function Home() {
           {/* Drawer (Left Aligned, Black & Grey Luxury) */}
           <div className="relative mr-auto flex h-full w-full max-w-md flex-col justify-between border-r border-white/10 bg-zinc-950 p-8 text-white transition-transform duration-300 sm:p-12">
             <div className="flex items-center justify-between border-b border-white/10 pb-6">
-              <span className="font-display text-xl tracking-tight text-white">
-                Project Art Group
-              </span>
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/logos/Logo PA Group white.png"
+                  alt="Project Art Group Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="font-display text-xl tracking-tight text-white">
+                  Project Art Group
+                </span>
+              </div>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="rounded-full border border-white/20 p-2 text-xs text-zinc-400 transition-colors hover:border-white hover:text-white"
