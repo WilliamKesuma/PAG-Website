@@ -10,9 +10,16 @@ import "@fontsource/pinyon-script/400.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Project Art Group — Trust Is a Must",
+  title: "Project Art Group",
   description:
     "Project Art Group has produced corporate, wedding, and celebration events since 2002. Project Art Corporate handles institutional and corporate events end to end.",
+  icons: {
+    icon: [
+      { url: "/icon.png?v=2", type: "image/png" },
+    ],
+    shortcut: "/icon.png?v=2",
+    apple: "/icon.png?v=2",
+  },
 };
 
 export default function RootLayout({
@@ -22,6 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon.png?v=2" type="image/png" sizes="any" />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

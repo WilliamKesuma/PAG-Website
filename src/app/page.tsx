@@ -107,7 +107,7 @@ export default function Home() {
       {/* ── FIXED STICKY HEADER ── */}
       <header
         className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 sm:px-12 transition-all duration-500 ${scrolled
-          ? "bg-black/60 dark:bg-black/60 light:bg-white/80 backdrop-blur-md border-b border-white/8 dark:border-white/8 light:border-black/8"
+          ? "bg-black/60 backdrop-blur-md border-b border-white/8"
           : "bg-transparent border-b border-transparent"
           }`}
       >
