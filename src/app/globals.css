@@ -61,6 +61,23 @@ body {
   animation-play-state: paused;
 }
 
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scrollVertical 18s linear infinite;
+}
+
+.animate-scroll-vertical:hover {
+  animation-play-state: paused;
+}
+
 body {
   background: var(--void);
   color: var(--bone-soft);

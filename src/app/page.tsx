@@ -42,7 +42,7 @@ const businesses = [
     name: "Project Art Corporate",
     tag: "Corporate & Institutional Events",
     description:
-      "Grand openings, galas, awards nights, expos, and launches — every corporate event that isn't a wedding. Run end to end since 2002 for names like Singapore Airlines, CIMB, and Mercedes-Benz.",
+      "Corporate Branch Studio | Grand openings, Galas, Awardings, Expos, and more. Every corporate event that isn't a wedding. Trusted by respected brands such as Singapore Airlines, CIMB, and Mercedes-Benz.",
     href: "/corporate",
     featured: true,
     logo: "/logos/LOGO PA CORP WHITE.png",
@@ -51,7 +51,7 @@ const businesses = [
     name: "Project Art Plus",
     tag: "Glamourous Weddings",
     description:
-      "The flagship studio — high-glamour weddings built from concept to the last dance.",
+      "Our Flagship Studio | High-glamour weddings built from concept to the last detail.",
     logo: "/logos/LOGO PA WHITE.png",
   },
   {
@@ -107,7 +107,7 @@ export default function Home() {
       {/* ── FIXED STICKY HEADER ── */}
       <header
         className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 sm:px-12 transition-all duration-500 ${scrolled
-          ? "bg-black/60 backdrop-blur-md border-b border-white/8"
+          ? "bg-black/60 dark:bg-black/60 light:bg-white/80 backdrop-blur-md border-b border-white/8 dark:border-white/8 light:border-black/8"
           : "bg-transparent border-b border-transparent"
           }`}
       >
@@ -123,14 +123,8 @@ export default function Home() {
           />
         </Link>
 
-        {/* Right: Menu button + Inquire pill */}
+        {/* Right: INQUIRE + MENU */}
         <div className="flex items-center gap-5 text-xs tracking-widest text-zinc-400 uppercase sm:gap-7">
-          <Link
-            href="/corporate#contact"
-            className="hidden rounded-full border border-white/30 px-5 py-2 text-white transition-all hover:border-white hover:bg-white hover:text-black sm:inline-block"
-          >
-            INQUIRE
-          </Link>
           <button
             onClick={openMenu}
             className="group flex items-center gap-2.5 transition-colors hover:text-white"
@@ -273,14 +267,15 @@ export default function Home() {
               />
               <button
                 onClick={closeMenu}
-                className="group flex items-center gap-2 text-xs tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
+                className="group flex items-center gap-2.5 text-xs tracking-widest text-zinc-400 uppercase transition-colors hover:text-white cursor-pointer"
                 aria-label="Close menu"
               >
                 <span>CLOSE</span>
-                <span className="flex flex-col gap-[3px] rotate-45">
-                  <span className="h-px w-4 bg-zinc-400 transition-colors group-hover:bg-white" style={{ transform: "translateY(3.5px)" }} />
-                  <span className="h-px w-4 bg-zinc-400 transition-colors group-hover:bg-white" style={{ transform: "translateY(-3.5px) rotate(90deg)" }} />
-                </span>
+                <img
+                  src="/Icons/close.png"
+                  alt="Close"
+                  className="h-3.5 w-3.5 object-contain brightness-0 invert opacity-60 transition-opacity duration-200 group-hover:opacity-100"
+                />
               </button>
             </div>
 
@@ -382,9 +377,20 @@ export default function Home() {
               From bespoke weddings, high-energy celebrations, and an array of corporate and institutional events.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/corporate#contact"
-                className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white"
+              <button
+                type="button"
+                onClick={() => {
+                  const footer = document.getElementById("footer");
+                  if (footer) {
+                    footer.scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    window.scrollTo({
+                      top: document.documentElement.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white cursor-pointer"
               >
                 <span
                   aria-hidden
@@ -393,7 +399,7 @@ export default function Home() {
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
                   Inquire for Your Event
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
 

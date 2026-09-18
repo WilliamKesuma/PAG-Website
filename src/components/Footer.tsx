@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const businesses = [
   "Project Art Corporate",
   "Project Art Plus",
@@ -7,35 +9,50 @@ const businesses = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black text-white">
+    <footer id="footer" className="border-t border-white/10 bg-black text-white">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-12">
         <div className="grid gap-12 sm:grid-cols-[1.3fr_1fr_1fr]">
-          <div>
-            <div className="mt-3 flex flex-wrap items-center gap-4">
-              <img
+          <div className="flex flex-col gap-6 sm:gap-8">
+            {/* Main Group Logo */}
+            <div>
+              <Image
                 src="/logos/LOGO PA GROUP PUTIH.png"
-                alt="Studio 1 Logo"
-                className="h-8 w-auto object-contain max-w-[120px]"
+                alt="Project Art Group"
+                width={200}
+                height={80}
+                className="h-16 sm:h-20 w-auto object-contain object-left"
               />
-              <img
-                src="/logos/LOGO PA CORP WHITE.png"
-                alt="Studio 1 Logo"
-                className="h-8 w-auto object-contain max-w-[120px]"
-              />
-              <img
+            </div>
+
+            {/* 4 Sub-studios Row: PA+, ONEWAY, PAC, PRIME PROJECT */}
+            <div className="flex flex-wrap items-center gap-5 sm:gap-6 pt-1">
+              <Image
                 src="/logos/LOGO PA WHITE.png"
-                alt="Studio 2 Logo"
-                className="h-8 w-auto object-contain max-w-[120px]"
+                alt="Project Art Plus"
+                width={100}
+                height={36}
+                className="h-7 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
               />
-              <img
-                src="/logos/LOGO PP PUTIH.png"
-                alt="Studio 3 Logo"
-                className="h-8 w-auto object-contain max-w-[120px]"
-              />
-              <img
+              <Image
                 src="/logos/LOGO ONEWAY WHITE.png"
-                alt="Studio 4 Logo"
-                className="h-8 w-auto object-contain max-w-[120px]"
+                alt="Oneway Party Idea"
+                width={120}
+                height={36}
+                className="h-6 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
+              />
+              <Image
+                src="/logos/LOGO PA CORP WHITE.png"
+                alt="Project Art Corporate"
+                width={110}
+                height={36}
+                className="h-6 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
+              />
+              <Image
+                src="/logos/LOGO PP PUTIH.png"
+                alt="Prime Project"
+                width={110}
+                height={36}
+                className="h-7 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
               />
             </div>
           </div>
@@ -72,16 +89,6 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                 >
                   WhatsApp: +62 811 3496 269
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com/ProjectArt.Corporate"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  Instagram: @ProjectArt.Corporate
                 </a>
               </li>
               <li className="text-zinc-500 pt-1 leading-relaxed">
