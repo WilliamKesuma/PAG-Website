@@ -327,14 +327,6 @@ export default function Home() {
                   marginTop: "32px",
                 }}
               >
-                <Link
-                  href="/corporate#contact"
-                  onClick={closeMenu}
-                  className="inline-flex items-center gap-3 rounded-full border border-white/25 px-7 py-3 text-sm tracking-widest text-white uppercase transition-all hover:bg-white hover:text-black"
-                >
-                  Inquire / Talk to Us
-                  <span className="text-base">→</span>
-                </Link>
               </div>
             </div>
 
