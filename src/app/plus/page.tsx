@@ -179,12 +179,16 @@ export default function Plus() {
                 <span>Welcome to</span>
               </div>
 
-              <h1
-                className="font-display text-4xl leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
-                style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8)" }}
-              >
-                PROJECT ART PLUS
-              </h1>
+              {/* Replaced Text Header with Logo */}
+              <div className="relative h-16 sm:h-24 lg:h-28 w-full max-w-md my-2">
+                <Image
+                  src="/logos/LOGO PA WHITE.png"
+                  alt="Project Art Plus"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                />
+              </div>
 
               <p className="mt-6 max-w-lg text-base leading-relaxed text-zinc-400 sm:text-lg">
                 Our Main High-Glamour Wedding Studio

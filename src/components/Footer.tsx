@@ -8,9 +8,13 @@ const businesses = [
   { name: "Oneway Party Idea", href: "/oneway" },
 ];
 
-export default function Footer() {
+interface FooterProps {
+  background?: string;
+}
+
+export default function Footer({ background = "bg-black" }: FooterProps) {
   return (
-    <footer id="footer" className="border-t border-white/10 bg-black text-white">
+    <footer id="footer" className={`border-t border-white/10 text-white ${background}`}>
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-12">
         <div className="grid gap-12 sm:grid-cols-[1.3fr_1fr_1fr]">
           <div className="flex flex-col gap-6 sm:gap-8">
