@@ -28,16 +28,47 @@ const eventTypes = [
   "Etc."
 ];
 
-const clients = [
-  { name: "Singapore Airlines", logo: "/Brand Logos/Singapore Air.png" },
-  { name: "Hong Kong Tourism Board", logo: "/Brand Logos/HKTB.png" },
-  { name: "Galaxy", logo: "/Brand Logos/Galaxy.png" },
-  { name: "Laifen", logo: "/Brand Logos/Laifen.png" },
-  { name: "Miracle", logo: "/Brand Logos/Miracle.png" },
-  { name: "Profira", logo: "/Brand Logos/Profira.png" },
-];
-
 const cities = ["Surabaya", "Bali", "Jakarta", "Semarang"];
+
+// ── Memory Wall Photography ───────
+const partyMemories = [
+  {
+    title: "Neon Birthday Bash",
+    location: "Vasa Hotel, Surabaya",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Gatsby Night Private Dinner",
+    location: "Mulberry, Bali",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Golden Anniversary Gala",
+    location: "The Westin, Jakarta",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Tropical Sunset Social",
+    location: "Canggu Beach Club, Bali",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Met Gala Themed Sweet 16",
+    location: "Majapahit, Surabaya",
+    year: "2022",
+    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Intimate Rooftop Lounge",
+    location: "Grand Hyatt, Jakarta",
+    year: "2022",
+    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+  },
+];
 
 // ── Placeholder event photography for the horizontal carousel ───────
 const heroSlides = [
@@ -162,8 +193,8 @@ export default function Oneway() {
               </h1>
 
               <p className="mt-6 max-w-lg text-base leading-relaxed text-zinc-400 sm:text-lg">
-                Birthdays, social parties, and the everyday celebrations that still
-                deserve a seamless run of show and unforgettable concepts.
+                Birthdays, social parties, and everyday celebrations that deserve
+                a seamless run of show and unforgettable concepts.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -295,69 +326,50 @@ export default function Oneway() {
         </div>
       </section>
 
-      {/* ── CLIENTS ── */}
+      {/* ── MEMORY WALL ── */}
       <section className="border-t border-white/10 bg-black px-6 py-20 sm:px-12 sm:py-28">
         <div className="mx-auto max-w-6xl">
-          <span className="text-xs tracking-widest text-zinc-400 uppercase">Trust</span>
+          <span className="text-xs tracking-widest text-zinc-400 uppercase">Memory Wall</span>
           <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            Brands and names we partner with
+            Past Parties &amp; Celebrations
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            A selection of companies and partners who trust our studio production quality.
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-zinc-400">
+            A look back at high-energy celebrations and bespoke private parties orchestrated by <strong>Oneway Party Idea</strong>.
           </p>
 
-          {/* White Box Container Logo Layout */}
-          <div className="mt-16 flex flex-wrap items-center justify-start gap-4 sm:gap-6">
-            {clients.map((c) => (
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {partyMemories.map((item, idx) => (
               <div
-                key={c.name}
-                className="flex h-16 sm:h-20 w-[140px] sm:w-[170px] items-center justify-center rounded-xl bg-white p-3 sm:p-4 shadow-sm transition-transform duration-300 hover:scale-105"
+                key={idx}
+                className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 transition-all duration-500 hover:border-white/30"
               >
-                <Image
-                  src={c.logo}
-                  alt={c.name}
-                  width={200}
-                  height={80}
-                  className="h-full w-auto max-w-full object-contain"
-                />
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end">
+                    <span className="text-[10px] tracking-widest text-zinc-400 uppercase font-mono">
+                      {item.year} · {item.location}
+                    </span>
+                    <h3 className="mt-1 font-display text-xl text-white tracking-wide">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
-      <section id="process" className="border-t border-white/10 bg-zinc-950 px-6 py-20 sm:px-12 sm:py-28">
-        <div className="mx-auto max-w-6xl">
-          <span className="text-xs tracking-widest text-zinc-400 uppercase">How we work</span>
-          <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            How a celebration gets built
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            The same seven stages, every time, regardless of the event&apos;s size.
-          </p>
-
-          <ol className="mt-14 grid gap-x-8 gap-y-0 sm:grid-cols-2">
-            {process.map((p, i) => (
-              <li
-                key={p.step}
-                className="group flex gap-5 border-t border-white/10 py-7 transition-colors hover:border-white/30"
-              >
-                <span className="font-display text-2xl text-zinc-700 transition-colors group-hover:text-white">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <p className="font-medium text-white">{p.step}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-zinc-500">{p.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* ── CONTACT ── */}
-      <section id="contact" className="border-t border-white/10 bg-black px-6 py-20 sm:px-12 sm:py-28">
+      <section id="contact" className="border-t border-white/10 bg-zinc-950 px-6 py-20 sm:px-12 sm:py-28">
         <div className="mx-auto max-w-6xl grid gap-12 sm:grid-cols-[1.2fr_1fr] sm:items-start">
           <div>
             <span className="text-xs tracking-widest text-zinc-400 uppercase">Contact</span>
@@ -504,17 +516,6 @@ export default function Oneway() {
                   {label}
                 </Link>
               ))}
-              <div
-                style={{
-                  opacity: menuExpanded ? 1 : 0,
-                  transform: menuExpanded ? "translateY(0)" : "translateY(28px)",
-                  transition: menuExpanded
-                    ? "opacity 0.5s 0.6s ease, transform 0.5s 0.6s ease"
-                    : "opacity 0.1s ease",
-                  marginTop: "28px",
-                }}
-              >
-              </div>
             </div>
 
             <div

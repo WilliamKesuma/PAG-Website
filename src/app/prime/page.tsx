@@ -17,57 +17,87 @@ const process = [
 ];
 
 const eventTypes = [
-  "Bespoke Weddings",
-  "VIP Private Dinners",
-  "Exclusive Galas",
-  "Milestone Celebrations",
-  "Luxury Brand Soirées",
-  "High-End Socials",
+  "Social Events",
+  "Private Parties",
+  "Weddings",
+  "Anniversaries",
+  "Celebrations",
+  "Special Occasions",
   "Etc."
 ];
 
-const clients = [
-  { name: "Singapore Airlines", logo: "/Brand Logos/Singapore Air.png" },
-  { name: "Hong Kong Tourism Board", logo: "/Brand Logos/HKTB.png" },
-  { name: "Galaxy", logo: "/Brand Logos/Galaxy.png" },
-  { name: "Laifen", logo: "/Brand Logos/Laifen.png" },
-  { name: "Miracle", logo: "/Brand Logos/Miracle.png" },
-  { name: "Profira", logo: "/Brand Logos/Profira.png" },
+// ── Memory Wall Photography ───────
+const weddingMemories = [
+  {
+    couple: "Alexander & Clarissa",
+    location: "The Mulia, Bali",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-2 aspect-[3/4]",
+  },
+  {
+    couple: "Michael & Vanessa",
+    location: "Westin, Surabaya",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-1 aspect-square",
+  },
+  {
+    couple: "David & Stephanie",
+    location: "Ritz-Carlton, Jakarta",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-1 aspect-square",
+  },
+  {
+    couple: "Christian & Michelle",
+    location: "Ayana Resort, Bali",
+    year: "2022",
+    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-2 aspect-[3/4]",
+  },
+  {
+    couple: "Nicholas & Samantha",
+    location: "Four Seasons, London",
+    year: "2022",
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-1 aspect-square",
+  },
+  {
+    couple: "Jonathan & Evelyn",
+    location: "Shangri-La, Surabaya",
+    year: "2021",
+    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80",
+    aspect: "col-span-1 row-span-1 aspect-square",
+  },
 ];
 
-const cities = ["Surabaya", "Bali", "Jakarta", "Semarang"];
+const cities = ["Surabaya", "Bali", "Jakarta", "Thailand", "London", "And More"];
 
-// ── Placeholder event photography for the horizontal carousel ───────
+// ── Carousel Photography ───────
 const heroSlides = [
   {
-    src: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
-    alt: "Luxury Gala Night",
-    title: "Luxury Gala",
+    src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+    alt: "Private Celebration",
+    title: "Private Celebration",
     client: "Prime Project · Surabaya",
   },
   {
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-    alt: "Bespoke Private Dinner",
-    title: "VIP Soirée",
-    client: "Prime Project · Jakarta",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
-    alt: "Destination Wedding & Celebration",
-    title: "Bespoke Wedding",
+    src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80",
+    alt: "Wedding Reception",
+    title: "Wedding Reception",
     client: "Prime Project · Bali",
   },
   {
-    src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
-    alt: "High-End Corporate Celebration",
-    title: "Exclusive Gala",
-    client: "Prime Project · Surabaya",
+    src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80",
+    alt: "Social Gathering",
+    title: "Milestone Party",
+    client: "Prime Project · Jakarta",
   },
 ];
 
 // ── Component ────────────────────────────────────────────────────
-export default function Prime() {
-  // ── Scroll-aware header ──────────────────────────────────────
+export default function Plus() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -75,7 +105,6 @@ export default function Prime() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ── Center-expand menu ───────────────────────────────────────
   const [menuPhase, setMenuPhase] = useState<"idle" | "opening" | "open" | "closing">("idle");
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -92,8 +121,6 @@ export default function Prime() {
 
   const menuVisible = menuPhase !== "idle";
   const menuExpanded = menuPhase === "open";
-
-  // ── Carousel Scroll Ref ───────────────────────────────────
   const carouselRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -134,7 +161,6 @@ export default function Prime() {
 
       {/* ── HERO SECTION ── */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-black pt-28 pb-16 sm:pt-36 sm:pb-24">
-        {/* Subtle grid texture */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
@@ -148,7 +174,6 @@ export default function Prime() {
         <div className="relative z-20 w-full pl-6 sm:pl-12 xl:pl-[calc((100vw-80rem)/2+3rem)]">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
 
-            {/* Left: Hero Content */}
             <div className="lg:col-span-5 pr-6 sm:pr-12 lg:pr-0">
               <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
                 <span>Welcome to</span>
@@ -158,13 +183,13 @@ export default function Prime() {
                 className="font-display text-4xl leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
                 style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8)" }}
               >
-                PRIME PROJECT
+                Prime Project
               </h1>
 
               <p className="mt-6 max-w-lg text-base leading-relaxed text-zinc-400 sm:text-lg">
-                Our Bespoke &amp; Luxury Event Studio
+                Our Intimate Wedding Studio
                 <br />
-                Crafted for distinguished celebrations, private galas, and high-profile social occasions requiring refined detail.
+                Focused on crafting what couples actually need, at a more accessible scale.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -188,24 +213,22 @@ export default function Prime() {
                 </button>
               </div>
 
-              {/* Quick stats */}
               <div className="mt-12 sm:mt-14 grid grid-cols-3 gap-4 sm:gap-10 border-t border-white/10 pt-8 text-left sm:text-center">
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">2024</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">2002</p>
                   <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Founded</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">40+</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Brands</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">70+</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Events / Year</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">4</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">5</p>
                   <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Cities</p>
                 </div>
               </div>
             </div>
 
-            {/* Right: Carousel */}
             <div className="relative lg:col-span-7 overflow-hidden">
               <div
                 ref={carouselRef}
@@ -253,10 +276,10 @@ export default function Prime() {
           <div>
             <span className="text-xs tracking-widest text-zinc-400 uppercase">Who we&apos;re for</span>
             <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-              Discerning private &amp; corporate clients
+              Intimate Weddings
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              From intimate VIP gatherings to grand luxury affairs, we bring meticulous planning and creative curation to every event.
+              Building your special day, at a more accessible scale.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
               {eventTypes.map((t) => (
@@ -272,11 +295,10 @@ export default function Prime() {
           <div>
             <span className="text-xs tracking-widest text-zinc-400 uppercase">Where we&apos;ve worked</span>
             <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-              Based in Surabaya. On the ground beyond it.
+              Based in Surabaya. Operational nationwide.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              Every destination below has seen a Prime Project event, produced
-              with the same high standards and discretion.
+              Our teams frequently travel to major cities across the region to bring custom concepts to life.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
               {cities.map((c) => (
@@ -292,68 +314,50 @@ export default function Prime() {
         </div>
       </section>
 
-      {/* ── CLIENTS ── */}
+      {/* ── MEMORY WALL ── */}
       <section className="border-t border-white/10 bg-black px-6 py-20 sm:px-12 sm:py-28">
         <div className="mx-auto max-w-6xl">
-          <span className="text-xs tracking-widest text-zinc-400 uppercase">Trust</span>
+          <span className="text-xs tracking-widest text-zinc-400 uppercase">Memory Wall</span>
           <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            Names that have called us back
+            Past Celebrations &amp; Weddings
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            A selection of the luxury brands and private hosts Prime Project has produced events for.
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-zinc-400">
+            A look back at the love stories, milestone celebrations, and bespoke weddings orchestrated by <strong>Prime Project</strong>.
           </p>
 
-          <div className="mt-16 flex flex-wrap items-center justify-start gap-4 sm:gap-6">
-            {clients.map((c) => (
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {weddingMemories.map((item, idx) => (
               <div
-                key={c.name}
-                className="flex h-16 sm:h-20 w-[140px] sm:w-[170px] items-center justify-center rounded-xl bg-white p-3 sm:p-4 shadow-sm transition-transform duration-300 hover:scale-105"
+                key={idx}
+                className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 transition-all duration-500 hover:border-white/30"
               >
-                <Image
-                  src={c.logo}
-                  alt={c.name}
-                  width={200}
-                  height={80}
-                  className="h-full w-auto max-w-full object-contain"
-                />
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.couple}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end">
+                    <span className="text-[10px] tracking-widest text-zinc-400 uppercase font-mono">
+                      {item.year} · {item.location}
+                    </span>
+                    <h3 className="mt-1 font-display text-xl text-white tracking-wide">
+                      {item.couple}
+                    </h3>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
-      <section id="process" className="border-t border-white/10 bg-zinc-950 px-6 py-20 sm:px-12 sm:py-28">
-        <div className="mx-auto max-w-6xl">
-          <span className="text-xs tracking-widest text-zinc-400 uppercase">How we work</span>
-          <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            How an event gets built
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            The same seven stages, every time, regardless of the event&apos;s scale.
-          </p>
-
-          <ol className="mt-14 grid gap-x-8 gap-y-0 sm:grid-cols-2">
-            {process.map((p, i) => (
-              <li
-                key={p.step}
-                className="group flex gap-5 border-t border-white/10 py-7 transition-colors hover:border-white/30"
-              >
-                <span className="font-display text-2xl text-zinc-700 transition-colors group-hover:text-white">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <p className="font-medium text-white">{p.step}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-zinc-500">{p.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* ── CONTACT ── */}
-      <section id="contact" className="border-t border-white/10 bg-black px-6 py-20 sm:px-12 sm:py-28">
+      <section id="contact" className="border-t border-white/10 bg-zinc-950 px-6 py-20 sm:px-12 sm:py-28">
         <div className="mx-auto max-w-6xl grid gap-12 sm:grid-cols-[1.2fr_1fr] sm:items-start">
           <div>
             <span className="text-xs tracking-widest text-zinc-400 uppercase">Contact</span>
@@ -361,7 +365,7 @@ export default function Prime() {
               Start with a conversation
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              Tell us your vision, date, and expectations. Our luxury event specialists at Prime Project will curate an unforgettable experience.
+              Reach out to plan your special day with the Prime Project team.
             </p>
           </div>
 
@@ -479,8 +483,8 @@ export default function Prime() {
 
               {[
                 { href: "/corporate", label: "Project Art Corporate", dim: true },
-                { href: "/plus", label: "Project Art Plus", dim: true },
-                { href: "/prime", label: "Prime Project", dim: false },
+                { href: "/plus", label: "Project Art Plus", dim: false },
+                { href: "/prime", label: "Prime Project", dim: true },
                 { href: "/oneway", label: "Oneway Party Idea", dim: true },
               ].map(({ href, label, dim }, i) => (
                 <Link
@@ -500,17 +504,6 @@ export default function Prime() {
                   {label}
                 </Link>
               ))}
-              <div
-                style={{
-                  opacity: menuExpanded ? 1 : 0,
-                  transform: menuExpanded ? "translateY(0)" : "translateY(28px)",
-                  transition: menuExpanded
-                    ? "opacity 0.5s 0.6s ease, transform 0.5s 0.6s ease"
-                    : "opacity 0.1s ease",
-                  marginTop: "28px",
-                }}
-              >
-              </div>
             </div>
 
             <div
