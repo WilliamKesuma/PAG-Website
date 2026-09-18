@@ -227,11 +227,11 @@ export default function Oneway() {
               <div className="mt-12 sm:mt-14 grid grid-cols-3 gap-4 sm:gap-10 border-t border-white/10 pt-8 text-left sm:text-center">
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">2002</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Est.</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">FOUNDED</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">100+</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Parties/Yr</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">30+</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">EVENTS/Yr</p>
                 </div>
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">4</p>

@@ -217,14 +217,15 @@ export default function Plus() {
                 </button>
               </div>
 
+              {/* Quick stats */}
               <div className="mt-12 sm:mt-14 grid grid-cols-3 gap-4 sm:gap-10 border-t border-white/10 pt-8 text-left sm:text-center">
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">2002</p>
                   <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Founded</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">70+</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Events / Year</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">50+</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Weddings/Yr</p>
                 </div>
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">5</p>
