@@ -203,8 +203,8 @@ export default function Oneway() {
                   <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Est.</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">100+</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Events/Yr</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">50+</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Brands</p>
                 </div>
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">4</p>
@@ -260,7 +260,7 @@ export default function Oneway() {
         <div className="mx-auto max-w-6xl">
           <span className="text-xs tracking-widest text-zinc-400 uppercase">Trust</span>
           <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            Names that have called us back
+            Brands that trusted us
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
             A selection of the companies and institutions Project Art Corporate has
