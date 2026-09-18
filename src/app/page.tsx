@@ -18,21 +18,21 @@ const brandLogos = [
     name: "Project Art Plus",
     tag: "Luxury Weddings",
     description: "Your description here...",
-    href: "#businesses",
+    href: "/plus",
     logo: "/logos/LOGO PA WHITE.png",
   },
   {
     name: "Prime Project",
     tag: "Modern Weddings",
     description: "Your description here...",
-    href: "#businesses",
+    href: "/prime",
     logo: "/logos/LOGO PP PUTIH.png",
   },
   {
     name: "Oneway Party Idea",
     tag: "Celebrations & Parties",
     description: "Your description here...",
-    href: "#businesses",
+    href: "/oneway",
     logo: "/logos/LOGO ONEWAY WHITE.png",
   },
 ];
@@ -52,6 +52,7 @@ const businesses = [
     tag: "Glamourous Weddings",
     description:
       "Our Flagship Studio | High-glamour weddings built from concept to the last detail.",
+    href: "/plus",
     logo: "/logos/LOGO PA WHITE.png",
   },
   {
@@ -59,6 +60,7 @@ const businesses = [
     tag: "Intimate Weddings",
     description:
       "Weddings built around what a couple actually needs, at a more accessible scale.",
+    href: "/prime",
     logo: "/logos/LOGO PP PUTIH.png",
   },
   {
@@ -66,6 +68,7 @@ const businesses = [
     tag: "Celebrations & Parties",
     description:
       "Birthdays, parties, and the everyday celebrations that still deserve a good run of show.",
+    href: "/oneway",
     logo: "/logos/LOGO ONEWAY WHITE.png",
   },
 ];
@@ -295,9 +298,9 @@ export default function Home() {
 
               {[
                 { href: "/corporate", label: "Project Art Corporate", dim: true },
-                { href: "#businesses", label: "Project Art Plus", dim: true },
-                { href: "#businesses", label: "Prime Project", dim: true },
-                { href: "#businesses", label: "Oneway Party Idea", dim: true },
+                { href: "/plus", label: "Project Art Plus", dim: true },
+                { href: "/prime", label: "Prime Project", dim: true },
+                { href: "/oneway", label: "Oneway Party Idea", dim: true },
               ].map(({ href, label, dim }, i) => (
                 <Link
                   key={label}
@@ -435,7 +438,6 @@ export default function Home() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {businesses.map((b) => {
-              const isLinked = !!b.href;
               const cardClass =
                 "group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-950 p-8 text-white transition-all duration-300 hover:border-white/40 hover:bg-zinc-900";
               const inner = (
@@ -465,18 +467,14 @@ export default function Home() {
                   </div>
 
                   <span className="mt-8 inline-flex items-center gap-2 text-xs tracking-widest text-zinc-600 uppercase transition-colors duration-300 group-hover:text-white">
-                    {isLinked ? "View Studio →" : "View Studio →"}
+                    View Studio →
                   </span>
                 </>
               );
-              return isLinked ? (
-                <Link key={b.name} href={b.href!} className={cardClass}>
+              return (
+                <Link key={b.name} href={b.href} className={cardClass}>
                   {inner}
                 </Link>
-              ) : (
-                <div key={b.name} className={cardClass}>
-                  {inner}
-                </div>
               );
             })}
           </div>

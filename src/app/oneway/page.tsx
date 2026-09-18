@@ -17,16 +17,14 @@ const process = [
 ];
 
 const eventTypes = [
-  "Concerts",
-  "Conferences",
-  "Expos",
-  "Gala Dinners",
-  "Awardings",
-  "Grand Openings",
+  "Birthdays",
   "Anniversaries",
-  "Sport Tournaments",
-  "Product Launches",
-  "Reunions",
+  "Private Dinners",
+  "Themed Parties",
+  "Social Gatherings",
+  "Graduations",
+  "Baby Showers",
+  "Pop-up Events",
   "Etc."
 ];
 
@@ -45,44 +43,31 @@ const cities = ["Surabaya", "Bali", "Jakarta", "Semarang"];
 const heroSlides = [
   {
     src: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
-    alt: "Corporate Gala Dinner",
-    title: "Gala Dinner",
-    client: "Singapore Airlines · Surabaya",
+    alt: "Private Birthday Celebration",
+    title: "Birthday Bash",
+    client: "Private Client · Surabaya",
   },
   {
     src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-    alt: "Grand Opening & Keynote Stage",
-    title: "Grand Opening",
-    client: "Mercedes-Benz · Jakarta",
+    alt: "Themed Social Gathering",
+    title: "Themed Party",
+    client: "Private Client · Bali",
   },
   {
     src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
-    alt: "Annual Awarding Night",
-    title: "Awarding Night",
-    client: "Miss Universe Indonesia · Bali",
+    alt: "Anniversary Celebration",
+    title: "Anniversary Night",
+    client: "Private Client · Jakarta",
   },
   {
     src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
-    alt: "Corporate Summit & Expo",
-    title: "Corporate Summit",
-    client: "CIMB · Surabaya",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=800&q=80",
-    alt: "Diplomatic & Embassy Reception",
-    title: "Embassy Dinner",
-    client: "British Embassy · Surabaya",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80",
-    alt: "Grand Ballroom Banquet",
-    title: "Ballroom Banquet",
-    client: "BCA Prioritas · Jakarta",
+    alt: "VIP Private Dinner",
+    title: "Private Dinner",
+    client: "Private Client · Surabaya",
   },
 ];
 
-// ── Component ────────────────────────────────────────────────────
-export default function Corporate() {
+export default function Oneway() {
   // ── Scroll-aware header ──────────────────────────────────────
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -109,7 +94,6 @@ export default function Corporate() {
   const menuVisible = menuPhase !== "idle";
   const menuExpanded = menuPhase === "open";
 
-  // ── Carousel Scroll Ref & Controls ───────────────────────────
   const carouselRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -150,7 +134,7 @@ export default function Corporate() {
 
       {/* ── HERO SECTION ── */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-black pt-28 pb-16 sm:pt-36 sm:pb-24">
-        {/* Subtle grid texture */}
+        {/* Grid texture */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
@@ -164,31 +148,39 @@ export default function Corporate() {
         <div className="relative z-20 w-full pl-6 sm:pl-12 xl:pl-[calc((100vw-80rem)/2+3rem)]">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
 
-            {/* Left: Original Hero Content */}
+            {/* Left Hero Content */}
             <div className="lg:col-span-5 pr-6 sm:pr-12 lg:pr-0">
               <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] tracking-widest text-zinc-300 uppercase backdrop-blur-md">
-                <span>Welcome to</span>
+                <span>Celebrations &amp; Parties</span>
               </div>
 
               <h1
                 className="font-display text-4xl leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
                 style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8)" }}
               >
-                PROJECT ART CORPORATE
+                Oneway Party Idea
               </h1>
 
               <p className="mt-6 max-w-lg text-base leading-relaxed text-zinc-400 sm:text-lg">
-                Our Corporate Branch Studio
-                <br />
-                designed for every corporate event that isn't a wedding.
-                <br />
-                Grand openings, Galas, Awardings, Expos, and more.
+                Birthdays, social parties, and the everyday celebrations that still
+                deserve a seamless run of show and unforgettable concepts.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  href="#contact"
-                  className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white"
+                <button
+                  type="button"
+                  onClick={() => {
+                    const contactSec = document.getElementById("contact");
+                    if (contactSec) {
+                      contactSec.scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      window.scrollTo({
+                        top: document.documentElement.scrollHeight,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="group relative overflow-hidden rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors duration-300 hover:border-white cursor-pointer"
                 >
                   <span
                     aria-hidden
@@ -197,18 +189,18 @@ export default function Corporate() {
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
                     Inquire for Your Event
                   </span>
-                </Link>
+                </button>
               </div>
 
               {/* Quick stats */}
               <div className="mt-12 sm:mt-14 grid grid-cols-3 gap-4 sm:gap-10 border-t border-white/10 pt-8 text-left sm:text-center">
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">2024</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Founded</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">2002</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Est.</p>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl text-white">40+</p>
-                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Brands</p>
+                  <p className="font-display text-2xl sm:text-3xl text-white">100+</p>
+                  <p className="mt-1 text-[11px] sm:text-xs tracking-widest text-zinc-500 uppercase">Parties/Yr</p>
                 </div>
                 <div>
                   <p className="font-display text-2xl sm:text-3xl text-white">4</p>
@@ -265,12 +257,10 @@ export default function Corporate() {
           <div>
             <span className="text-xs tracking-widest text-zinc-400 uppercase">Who we&apos;re for</span>
             <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-              Mid-to-large corporate &amp; institutional clients
+              High-energy social events &amp; bespoke parties
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              From intimate gatherings to large-scale productions, we work across industries
-              <br />
-              Hospitality, Finance, Retail, Sports, Aviation and more. No event is too small or too big.
+              From milestone birthdays to private thematic dinners, we handle every detail so you can enjoy being the host.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
               {eventTypes.map((t) => (
@@ -289,8 +279,7 @@ export default function Corporate() {
               Based in Surabaya. On the ground beyond it.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              Every destination below has seen a Project Art Corporate event, produced
-              with the same standard as at home.
+              Every destination below has seen a Oneway Party event produced with excellence.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
               {cities.map((c) => (
@@ -311,13 +300,13 @@ export default function Corporate() {
         <div className="mx-auto max-w-6xl">
           <span className="text-xs tracking-widest text-zinc-400 uppercase">Trust</span>
           <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            Names that have called us back
+            Brands and names we partner with
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            A selection of the companies and institutions Project Art Corporate has
-            produced events for.
+            A selection of companies and partners who trust our studio production quality.
           </p>
 
+          {/* White Box Container Logo Layout */}
           <div className="mt-16 flex flex-wrap items-center justify-start gap-4 sm:gap-6">
             {clients.map((c) => (
               <div
@@ -342,7 +331,7 @@ export default function Corporate() {
         <div className="mx-auto max-w-6xl">
           <span className="text-xs tracking-widest text-zinc-400 uppercase">How we work</span>
           <h2 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-            How an event gets built
+            How a celebration gets built
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
             The same seven stages, every time, regardless of the event&apos;s size.
@@ -376,14 +365,12 @@ export default function Corporate() {
               Start with a conversation
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400">
-              Tell us the event, the date, and roughly what it needs to do. Glenn, who
-              leads marketing and client relationships for Project Art Corporate, will
-              take it from there.
+              Tell us the celebration date, theme ideas, and location. Our team will take care of the rest.
             </p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-zinc-950 p-8">
-            <p className="text-xs tracking-widest text-zinc-500 uppercase">Project Art Corporate</p>
+            <p className="text-xs tracking-widest text-zinc-500 uppercase">Oneway Party Idea</p>
             <p className="mt-3 font-display text-2xl text-white">Get in touch with us</p>
             <dl className="mt-8 space-y-5 text-sm">
               <div className="flex flex-col gap-1">
@@ -447,10 +434,8 @@ export default function Corporate() {
               overflow: "hidden",
             }}
           >
-            {/* Thin line while collapsed */}
             <div style={{ position: "absolute", top: "50%", left: "10%", right: "10%", height: "1px", background: "rgba(255,255,255,0.15)", transform: "translateY(-50%)", opacity: menuExpanded ? 0 : 1, transition: "opacity 0.2s" }} />
 
-            {/* Menu header */}
             <div
               className="flex items-center justify-between px-6 py-5 sm:px-12 border-b border-white/8"
               style={{
@@ -482,7 +467,6 @@ export default function Corporate() {
               </button>
             </div>
 
-            {/* Nav links */}
             <div className="flex flex-1 flex-col justify-center px-6 sm:px-12 lg:px-20">
               <p
                 style={{
@@ -498,10 +482,10 @@ export default function Corporate() {
               </p>
 
               {[
-                { href: "/corporate", label: "Project Art Corporate", dim: false },
+                { href: "/corporate", label: "Project Art Corporate", dim: true },
                 { href: "/plus", label: "Project Art Plus", dim: true },
                 { href: "/prime", label: "Prime Project", dim: true },
-                { href: "/oneway", label: "Oneway Party Idea", dim: true },
+                { href: "/oneway", label: "Oneway Party Idea", dim: false },
               ].map(({ href, label, dim }, i) => (
                 <Link
                   key={label}
@@ -520,9 +504,19 @@ export default function Corporate() {
                   {label}
                 </Link>
               ))}
+              <div
+                style={{
+                  opacity: menuExpanded ? 1 : 0,
+                  transform: menuExpanded ? "translateY(0)" : "translateY(28px)",
+                  transition: menuExpanded
+                    ? "opacity 0.5s 0.6s ease, transform 0.5s 0.6s ease"
+                    : "opacity 0.1s ease",
+                  marginTop: "28px",
+                }}
+              >
+              </div>
             </div>
 
-            {/* Footer strip */}
             <div
               className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between px-6 py-4 sm:px-12 border-t border-white/8 text-xs text-zinc-600"
               style={{
