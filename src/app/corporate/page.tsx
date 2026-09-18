@@ -497,8 +497,9 @@ export default function Corporate() {
               >
                 Studios &amp; Directory
               </p>
+
               {[
-                { href: "/corporate", label: "Project Art Corporate", dim: false },
+                { href: "/corporate", label: "Project Art Corporate", dim: true },
                 { href: "/", label: "Project Art Plus", dim: true },
                 { href: "/", label: "Prime Project", dim: true },
                 { href: "/", label: "Oneway Party Idea", dim: true },
@@ -514,9 +515,8 @@ export default function Corporate() {
                       ? `opacity 0.5s ${0.32 + i * 0.07}s ease, transform 0.5s ${0.32 + i * 0.07}s ease`
                       : "opacity 0.1s ease",
                   }}
-                  className={`font-display block py-2.5 sm:py-3 text-2xl tracking-tight transition-colors hover:text-white sm:text-5xl ${
-                    dim ? "text-zinc-500" : "text-white"
-                  }`}
+                  className={`font-display block py-2.5 sm:py-3 text-2xl tracking-tight transition-colors hover:text-white sm:text-5xl ${dim ? "text-zinc-700" : "text-white"
+                    }`}
                 >
                   {label}
                 </Link>

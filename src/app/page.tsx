@@ -294,7 +294,7 @@ export default function Home() {
               </p>
 
               {[
-                { href: "/corporate", label: "Project Art Corporate", dim: false },
+                { href: "/corporate", label: "Project Art Corporate", dim: true },
                 { href: "#businesses", label: "Project Art Plus", dim: true },
                 { href: "#businesses", label: "Prime Project", dim: true },
                 { href: "#businesses", label: "Oneway Party Idea", dim: true },
