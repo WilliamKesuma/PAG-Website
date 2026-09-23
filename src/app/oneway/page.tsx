@@ -125,7 +125,98 @@ export default function Oneway() {
   const menuVisible = menuPhase !== "idle";
   const menuExpanded = menuPhase === "open";
 
-  const carouselRef = useRef<HTMLDivElement>(null);
+  // ── Draggable / infinite-loop carousel ────────────────────────
+  // A single JS-owned position (in px) drives the track's transform.
+  // No native scrollLeft and no CSS keyframe animation are used —
+  // mixing those with a transform is what lets the visible offset drift
+  // past the duplicated content and go blank. Position is wrapped with
+  // modulo math every frame, so it is never possible to run out.
+  const trackRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef(0); // always kept in (-singleSetWidth, 0]
+  const singleSetWidthRef = useRef(0);
+  const speedRef = useRef(0); // px/second, auto-scroll speed
+  const rafRef = useRef<number | null>(null);
+
+  const [isDragging, setIsDragging] = useState(false);
+  const isDownRef = useRef(false);
+  const isPausedRef = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartPosition = useRef(0);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function scheduleResume() {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      isPausedRef.current = false;
+    }, 2500);
+  }
+
+  function measureTrack() {
+    if (!trackRef.current) return;
+    const fullWidth = trackRef.current.scrollWidth; // 2 copies of heroSlides
+    singleSetWidthRef.current = fullWidth / 2;
+    speedRef.current = singleSetWidthRef.current / 24; // ~match old 24s loop
+  }
+
+  useEffect(() => {
+    measureTrack();
+    window.addEventListener("resize", measureTrack);
+
+    let lastTime = performance.now();
+    function tick(now: number) {
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+
+      if (!isDownRef.current && !isPausedRef.current && singleSetWidthRef.current > 0) {
+        positionRef.current -= speedRef.current * dt;
+      }
+
+      const w = singleSetWidthRef.current;
+      if (w > 0) {
+        // Wrap position into (-w, 0] — since both halves of the track are
+        // pixel-identical copies, this wrap is always visually seamless,
+        // no matter how far or fast the user dragged.
+        while (positionRef.current <= -w) positionRef.current += w;
+        while (positionRef.current > 0) positionRef.current -= w;
+      }
+
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    }
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("resize", measureTrack);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    };
+  }, []);
+
+  function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    isDownRef.current = true;
+    isPausedRef.current = true;
+    setIsDragging(true);
+    dragStartX.current = e.clientX;
+    dragStartPosition.current = positionRef.current;
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+  }
+
+  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (!isDownRef.current) return;
+    e.preventDefault();
+    const dx = e.clientX - dragStartX.current;
+    positionRef.current = dragStartPosition.current + dx;
+    // RAF loop wraps + applies the transform every frame, so no work needed here.
+  }
+
+  function handlePointerUp() {
+    if (!isDownRef.current) return;
+    isDownRef.current = false;
+    setIsDragging(false);
+    scheduleResume();
+  }
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black overflow-x-hidden">
@@ -243,14 +334,21 @@ export default function Oneway() {
             {/* Right: Carousel */}
             <div className="relative lg:col-span-7 overflow-hidden">
               <div
-                ref={carouselRef}
-                className="relative w-full overflow-hidden"
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+                className={`relative w-full overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
                 style={{
                   maskImage: "linear-gradient(to right, transparent, black 4%, black 100%)",
                   WebkitMaskImage: "linear-gradient(to right, transparent, black 4%, black 100%)",
+                  touchAction: "none",
                 }}
               >
-                <div className="animate-marquee flex gap-4 sm:gap-5 w-max hover:[animation-play-state:paused]">
+                <div
+                  ref={trackRef}
+                  className="flex gap-4 sm:gap-5 w-max will-change-transform"
+                >
                   {[...heroSlides, ...heroSlides].map((slide, idx) => (
                     <div
                       key={idx}
@@ -261,8 +359,9 @@ export default function Oneway() {
                         alt={slide.alt}
                         fill
                         sizes="(max-width: 640px) 200px, (max-width: 1280px) 240px, 270px"
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
                         priority={idx < 4}
+                        draggable={false}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
                       <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">

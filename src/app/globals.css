@@ -43,6 +43,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Scrollbar-hide for individual scrollable elements (Firefox needs this per-element, not just on html/body) */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 /* Custom marquee animations for logo carousel */
 @keyframes marquee {
   0% {
